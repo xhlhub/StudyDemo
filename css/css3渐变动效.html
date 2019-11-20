@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				border: 1px solid #eee;
+			}
+			header{
+				overflow: hidden;
+			}
+			.inner{
+				height: 3px;
+				width: 200%;
+				transform: translateX(-50%);
+				background: #27c4f5 linear-gradient(to right,#27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5 , #27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5);
+				animation: goright 0.8s linear infinite;
+			}
+			@keyframes goright{
+				from{
+					transform: translateX(-50%);
+				}
+				to{
+					transform: translateX(0%);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header >
+			<div class="inner"></div>
+		</header>
+		<h1><span>啊啊啊</span><sup>12</sup></h1>
+	</body>
+	<script type="text/javascript">
+		obj={
+			a:1
+		}
+		var obj1 =Object.assign({},obj) 
+		obj1.a=2;
+		console.log(obj.a)
+	</script>
+</html>

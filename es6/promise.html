@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function positiveNum(num){//传入正数返回reject,非正数reject
+			return new Promise(function(resolve,reject){
+					window.setTimeout(function(){
+						if(num>=0){
+							resolve(num)
+						}else{
+							reject('小于0')
+						}
+					},50)
+				})
+		}
+	//1:then接受2个函数，第一个处理resolve，第二个处理reject，这是不会触发catch
+//		positiveNum(-1)
+//			.then(function(res){
+//				console.log(res)
+//			},function(error){
+//				console.log(error)
+//			})
+//			.catch(function(error){
+//				console.log(error)
+//			})
+	//2:then如果then只传了一个函数，则promise的reject由catch执行
+//		positiveNum(-1)
+//			.then(function(res){
+//				debugger
+//				console.log(res)
+//			})
+//			.catch(function(error){
+//				debugger
+//				console.log(error)
+//			})
+	//3:如果then里抛出throw new Error(error)，执行catch
+		
+//		positiveNum(1)
+//		.then(function(res){
+//			debugger
+//			console.log(res)
+//			throw new Error(res)//3.1抛出 throw new Error
+//		})
+//		.catch(function(error){
+//			debugger
+//			console.log(error)
+//		})
+
+//		positiveNum(1)
+//		.then(function(res){
+//			console.log(awdwa)//3.1错误代码，也触发catch
+//		})
+//		.catch(function(error){
+//			debugger
+//			console.log(error)
+//		})
+
+	//4: then+then 链式操作!!!!!   then默认返回一个promise(resolve的)!!!!!!!!!!
+//		positiveNum(1)
+//			.then(function(res){
+//				console.log(res)
+//			})
+//			.then(function(res){
+//				console.log(res)
+//			})
+//		positiveNum(1)
+//			.then(function(res){
+//				console.log(res) //
+//				return 123
+//			}).then(function(res){
+//				console.log(res) //123
+//			})
+	//5:then返回一个new promise
+//		positiveNum(1)
+//			.then(function(res){
+//				return new Promise(function(resolve){
+//					resolve(123)
+//				})
+//			})
+//			.then(function(res){
+//				console.log(res) //123
+//			})
+//		positiveNum(-1)
+//			.catch(function(res){
+//				return new Promise(function(resolve){
+//					resolve(123)
+//				})
+//			})
+//			.then(function(res){
+//				console.log(res) //123
+//			})
+	//6:catch+then catch也会返回一个promise实例，并且是resolved状态
+//		positiveNum(-1)
+//			.catch(function(res){
+//				console.log(res)
+//			})
+//			.then(function(){
+//				console.log(1)
+//			})	
+	//7:catch/then 里 throw new Error('错误')，则返回一个rejected的promise
+//		positiveNum(-1)
+//			.catch(function(res){
+//				throw new Error('错误')
+//			})
+//			.then(function(res){
+//				console.log(res)
+//			})
+//			.catch(function(error){
+//				console.log(error)
+//			})
+
+	//8:Promise.all([promise1,promise3,promise3])
+//		数组里可以是Promise对象，也可以是别的值，只有Promise会等待状态改变
+//		当所有的子Promise都完成，该Promise完成，返回值是全部值得数组
+//		有任何一个失败，该Promise失败，返回值是第一个失败的子Promise结果
+//		Promise.race() 类似于Promise.all() ，区别在于它有任意一个完成就算完成
+
+//		常见用法：
+//		异步操作和定时器放在一起，，如果定时器先触发，就认为超时，告知用户；
+//		例如我们要从远程的服务家在资源如果5000ms还没有加载过来我们就告知用户加载失败
+
+	
+
+/*
+ 总结：
+ * */
+/*1:promise三个状态: pending(待定)  fulfilled(成功)  rejected(失败)
+2:promise接受一个函数俩个参数:resolve  reject
+3:resolve触发导致: pending→fulfilled
+reject触发导致: pending→rejected*/
+
+//1:promise函数resolve触发执行then,promise函数reject触发执行catch
+//2:then catch都默认返回一个promise(fulfilled状态)，为了支持链式操作？
+//	then/catch里 return 1，则相当于new Promise(function(resole){resole(1)})
+//  then catch也可以返回一个新的promise
+
+//3：嵌套=顺序
+//	then(
+//		new Promise().then(2).then(3)
+//	)
+//	等同于
+//	then(1).then(2).then(3)
+
+	</script>
+	
+<script type="text/javascript">
+//then链式操作用法
+//function a(param){
+//	function b(paramB){
+//		function c(paramC){
+//			
+//		}
+//	}
+//}
+//等同于
+//new Promise(function(resolve,reject,param){
+//})
+//.then(function b(paramB){
+//	return paramC
+//})
+//.then(function c(paramC){
+//	console.log(paramC)
+//})	
+
+//a(1)
+//function a(param){
+//	var paramB = ++param;
+//	b(paramB)
+//}
+//function b(paramB){
+//	var paramC = ++paramB;
+//	c(paramC)
+//}
+//function c(paramC){
+//	console.log(++paramC) ;
+//}
+
+//等同于
+//function a(param){
+//	return ++param;
+//}
+//function b(param){
+//	return ++param;
+//}
+//function c(param){
+//	return ++param;
+//}
+//function aPromise(param){
+//	return new Promise(function(resolve,reject){
+//		resolve(a(param))
+//	})
+//}
+//
+//aPromise(1)
+//.then(function (param){
+//	return b(param)
+//})
+//.then(function (param){
+//	console.log(c(param))
+//})
+
+//function aPromise(param){
+//	return new Promise(function(resolve,reject){
+//		resolve(++param)
+//	})
+//}
+//aPromise(1).then(function (paramB){
+//	return ++paramB
+//})
+//.then(function (paramC){
+//	console.log(++paramC)
+//})	
+	
+	function sleep(){
+		return new Promise(function(resolve,reject){
+			window.setTimeout(function(){
+				resolve()
+			},1000)
+		})
+	}
+	function a(){
+		return false
+	}
+	console.time()
+	
+	sleep()
+	.then(()=>{
+		sleep()
+	})
+	.then(()=>{
+		console.timeEnd()
+	})
+</script>
+</html>

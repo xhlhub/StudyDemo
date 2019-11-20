@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button>按钮</button>
+	</body>
+	<script type="text/javascript">
+		var btn = document.querySelector("button")
+		//常规写法
+		btn.onclick=function(e){
+			console.log(e.target)
+		}
+		//引用函数
+		btn.onclick=fun//这里的函数不需要传参，参数也只有内置的e
+		function fun(e){
+			console.log(e.target)
+		}
+		
+		//*********错误写法***************
+		btn.onclick=fun(e,"btn")//这里会直接调用，而不是点击按钮才调用，这里只是绑定一个函数而已
+		function fun(e,btn){
+			console.log(e.target)
+			console.log(btn)
+		}
+		//其他类似的
+		img.onload=fun    
+		
+		//jquery
+		$("button").click(function(e){
+			
+		})
+		//等同于
+		$("button").click(fun)
+		function fun(e){
+			console.log(e.target)
+			console.log(btn)
+		}
+	</script>
+</html>

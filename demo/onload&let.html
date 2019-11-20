@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="div">
+			啊啊啊啊
+		</div>
+		<button>按钮</button>
+	</body>
+	<script type="text/javascript">
+//		支持onload事件元素
+//		<body>, <frame>, <frameset>, <iframe>, <img>, <link>, <script>
+	</script>
+	<script type="text/javascript">
+		var arry = ['snow1.jpg','snow2.jpg']
+		
+//		1:
+//		for(var i =0;i<arry.length;i++){
+//			var img =document.createElement('img')
+//			img.src='snow1.jpg';
+//			img.onload=(i){
+//				console.log(i)
+//			}
+//		}
+		
+//		2:
+//		for(let i =0;i<arry.length;i++){
+//			var img =document.createElement('img')
+//			img.src='snow1.jpg';
+//			img.onload=(i){
+//				console.log(i)
+//			}
+//		}		
+		
+//		3:
+//		function dosome(i){
+//			console.log(i)
+//		}
+//		
+//		for(var i =0;i<arry.length;i++){
+//			var img =document.createElement('img')
+//			img.src='snow1.jpg';
+//			img.onload=dosome(i)
+//		}
+
+		
+	</script>
+	
+	<script type="text/javascript">
+		var btn = document.querySelector("button")
+		btn.onclick=aaa
+		function aaa(a,b,c){
+			debugger
+		}
+	</script>
+</html>

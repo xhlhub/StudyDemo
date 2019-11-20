@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" name="" id="input" value="" />
+		<div>name:<span style="font-weight: 600;" id="name"></span></div>
+	</body>
+	<script type="text/javascript">
+		var spanDom=document.getElementById("name");
+		var inputDom=document.getElementById("input");	
+//		inputDom.onchange=function(){
+//			subject.name=inputDom.value;
+//		}
+		//观察者
+		var observer={
+			//观察者反应
+			action:function (){
+				spanDom.innerText=subject.name;
+			}
+		}
+		//被观察者
+		var subject={
+			_name:"",
+			observerList:[observer],//观察者对象list
+			set name(name){
+				this._name=name;
+				//监听值改变就执行观察者队列
+				this.observerList.map(observerItem=>{
+					observerItem.action()
+				})
+			},
+			get name(){
+				return this._name
+			},
+		}
+		subject.name="aaa";
+	</script>
+</html>

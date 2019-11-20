@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+			body{
+				background: url(starsky.jpg);
+				background-size: cover;
+			}
+			canvas{
+				border: 1px solid #eee;
+				border: none;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="1287" height="697"></canvas>
+	</body>
+<script type="text/javascript" src="dot.js"></script>
+<script type="text/javascript">
+	var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+    var canvasWidth = canvas.width;
+    var canvasHeight = canvas.height;
+    
+    // store: 存放dot, num: 初始dot数量
+	var store=[],num =100;
+	//跟随鼠标移动的dot
+	var captureDot=null;
+	
+	start()
+	
+	function start(){
+		//初始化添加点
+		addDot(num)
+		//动画
+		render()
+		//添加事件
+		addEvent()
+ 	}
+	function addDot(dot_num,_x,_y){
+		var len= store.length;
+		for (let i=len;i<dot_num+len;i++) {
+			let x= _x||Math.random()*canvasWidth;
+			let y= _y||Math.random()*canvasHeight;
+			let r= parseInt(Math.random()*2)+1;
+			let speedX= 0.9 - Math.random()*1.8;
+			let speedY= 0.9 - Math.random()*1.8;
+			let opcity = (parseInt(Math.random()*5)+6)/10;
+			store[i] = new Dot(x,y,r,speedX,speedY,opcity,i)
+		}
+	}
+	function render(){
+		ctx.clearRect(0,0,canvasWidth,canvasHeight);
+		draw();
+		requestAnimationFrame(()=>{
+			render()
+		})
+	}
+	function draw(){
+		draw_dot()
+		draw_line()
+	}
+	function draw_dot(){
+		store.map(dot=>{
+			dot.animate()
+		});
+	}
+	function draw_line(){
+		ctx.save();
+		ctx.strokeStyle="#fff";
+		ctx.globalAlpha=0.2;
+		store.map(dot=>dot.isTraverse=false)
+		store.map(dot=>{
+			drawLine(dot)
+		})
+		ctx.restore()
+	}
+	var dis=160;
+	//画线条
+	function drawLine(start_dot){
+		let start_x = start_dot.x;
+		let start_y = start_dot.y;
+		store.map((end_dot)=>{
+			if((end_dot.id == start_dot.id)||end_dot.isTraverse){//排除自己和已遍历的
+				return
+			}
+			let x = end_dot.x, y=end_dot.y;
+// 			((x-start_x<dis)&&(x-start_x>-dis))&&((y-start_y<dis)&&(y-start_y>-dis))
+// 			Math.abs(x-start_x)<dis&&Math.abs(y-start_y)<dis
+			if((x-start_x)*(x-start_x)+(y-start_y)*(y-start_y)<20000){
+				ctx.beginPath();
+				ctx.moveTo(start_x,start_y);
+				ctx.lineTo(x,y);
+				ctx.stroke()
+			}
+		})
+		start_dot.isTraverse=true;//标识为已遍历
+	}
+	function addEvent(){
+		addClickEvent()
+		addMousemoveEvent()
+	}
+	/*
+	 点击新增dot
+	 * */
+	function addClickEvent(){
+		var oBody= document.getElementsByTagName("body")[0]
+		oBody.onclick=function(event){
+			var e = event ? event : window.event;
+			var x = e.clientX, y = e.clientY;
+			addDot(5,x,y);
+		}
+	}
+	/*
+	 捕获dot，跟随鼠标移动
+	 当已有捕获dot，鼠标停留在另一个点捕获范围内并且停留500ms,则交换捕获点
+	 * */
+	let newCaptureDot =null,newCaptureDotTimeout=null;
+	
+	function addMousemoveEvent(){
+		var oBody= document.getElementsByTagName("body")[0]
+		oBody.onmousemove=function(event){
+			var e = event ? event : window.event;
+			var clientX = e.clientX, clientY = e.clientY;
+			//移动鼠标清楚 新捕获计时
+			window.clearTimeout(newCaptureDotTimeout)
+			
+			if(!captureDot){//如果没有被捕获的点，则捕获
+				for (let i=0;i<store.length;i++) {
+					let dot = store[i], x = dot.x, y = dot.y ;
+					if((x-clientX)*(x-clientX)+(y-clientY)*(y-clientY)<600){//10：捕获范围
+						captureDot=dot;
+						break;
+					}
+				}
+			}else{//有被捕获的点，则让点跟随鼠标移动
+				let dotX = captureDot.x, dotY = captureDot.y;
+				
+				//捕获交换
+				for (let i=0;i<store.length;i++) {
+					if(store[i] == captureDot){ continue }
+					let dot = store[i], x = dot.x, y = dot.y ;
+					if((x-clientX)*(x-clientX)+(y-clientY)*(y-clientY)<600){//10：捕获范围
+						let newCaptureDot =dot;
+						newCaptureDotTimeout = window.setTimeout(()=>{
+							let x = newCaptureDot.x, y = newCaptureDot.y;
+							if((x-clientX)*(x-clientX)+(y-clientY)*(y-clientY)<600){
+								captureDot = newCaptureDot
+							}
+						},50)
+						break;
+					}
+				}
+				
+				//超过鼠标一定范围内，释放点
+				if((dotX-clientX)*(dotX-clientX)+(dotY-clientY)*(dotY-clientY)>90000){
+					captureDot=null;
+				}else{//在范围内，则移动
+					window.setTimeout(function(){
+						captureDot.x=e.clientX;
+						captureDot.y=e.clientY;
+					},60)					
+				}
+			}
+		}
+	}
+	</script>
+</html>

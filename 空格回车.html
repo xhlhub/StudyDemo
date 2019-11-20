@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#view{
+				width: 200px;
+				border: 1px solid #197FAA;
+				/*white-space: pre;*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="view">&nbsp; /n</div>
+		
+		<textarea name="" rows="" cols=""></textarea>
+		<button onclick="getText()">获取输入值</button>
+		<script type="text/javascript">
+			var view = document.querySelector('#view')
+			var oTextarea = document.querySelector('textarea')
+			function getText(){
+				console.log(oTextarea.value.toString())
+				view.innerText='啊&nbsp;哦'
+			}
+		</script>
+	</body>
+</html>

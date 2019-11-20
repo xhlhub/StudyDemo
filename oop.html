@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+//		function Animal(){
+//			
+//		}
+//		Animal.prototype.type="animal";
+//		
+//		function Cat(name){
+//			this.name=name;
+//			this.sayName=function(){
+//				alert("my name is"+this.name)
+//			}
+//		}
+//		var obj = {
+//			kind:"mao",
+//			say:function(){
+//				alert("miao~~~")
+//			}
+//		}
+//		Cat.prototype=Object.assign(new Animal(),obj)
+		//等同于 Cat.prototype=new Animal(); Object.assign(Cat.prototype,obj)
+//
+//		var mao1 = new Cat("mao1");
+//		mao1.type;
+	</script>
+	<script type="text/javascript">
+		class Animal {
+			constructor(sex){
+				this.sex=sex
+			}
+		}
+		Animal.prototype.type="animal";
+		
+		class Cat extends Animal{
+			constructor(sex,name){
+				super(sex)
+				this.name = name;
+			}
+			say(){
+				alert("miao~~~")
+			}
+		}
+		Cat.prototype.kind="mao"
+		var mao1 = new Cat("man","mao1");	
+		mao1.type
+		debugger
+	</script>
+</html>
