@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var attr=[{
+			id:1,
+			sort:0,
+		},{
+			id:3,
+			sort:0
+		},{
+			id:2,
+			sort:0
+		}
+		]
+		var maps={1:1,2:2,3:3};
+		
+		attr.sort((a,b)=>{
+			a.sort = maps[a.id];
+			b.sort = maps[b.id];
+			return maps[a.id] -maps[b.id]
+		})
+		console.log(attr)
+	</script>
+</html>

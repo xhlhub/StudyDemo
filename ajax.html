@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var xhr = new XMLHttpRequest();
+		//1：请求方式2：接口地址 3：是否异步
+		xhr.open("GET", "a/query", true)
+		xhr.setRequestHeader("key", "value");
+		//4：数据(post方式有效)
+		xhr.send(null)
+		xhr.onreadystatechange = function() { //ajax状态监听事件
+			if(xhr.readyState == 4 && xhr.status == 200) { //1、open未调用;2、open调用，未调用 3、4
+				//5:回调
+				success(xhr.responseText)
+			}
+		}
+
+		function success(res) {
+			console.log(res)
+		}
+	</script>
+	<script type="text/javascript">
+		//封装函数  ajax
+		ajaxGet(url, success) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "a/query", true)
+			xhr.onreadystatechange = function() { //ajax状态监听事件
+				if(xhr.readyState == 4 && xhr.status == 200) { //1、open未调用;2、open调用，未调用 3、4
+					//5:回调
+					success(xhr.responseText)
+				}
+			}
+		}
+		ajaxGet("aa/dawaaaa", function(ress) {})
+	</script>
+	<script type="text/javascript">
+		//封装jq Ajax
+		function $() {//不能用
+			this.ajax = function(url, settings) {
+				var xhr = new XMLHttpRequest();
+				xhr.open(setting.methods, url)
+				xhr.send(settings.data || null);
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4 && xhr.status == 200) {
+						settings.success(xhr.responseText)
+					}
+				}
+			}
+			this.get = function(url, data, callback) {
+				if(typeof data == "function") {
+					callback = data
+				}
+				this.ajax(url, {
+					success: callback
+				})
+			}
+		}
+
+		var $ = {
+			ajax: function(url, settings) {
+				debugger
+				var xhr = new XMLHttpRequest();
+				xhr.open(settings.methods, url)
+				xhr.send(settings.data || null);
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4 && xhr.status == 200) {
+						settings.success(xhr.responseText)
+					}
+				}
+			},
+			get: function(url, data, callback) {
+				if(typeof data == "function") {
+					callback = data
+				}
+				this.ajax(url, {
+					methods: "get",
+					success: callback
+				})
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		//封装axios Ajax
+		var axios = {
+			xhr: {},
+			config: {},
+			ajax: function(url, config) {
+				this.config = config;
+				this.xhr = new XMLHttpRequest();
+				this.xhr.open(config.methods, url);
+				this.xhr.send(config.data || null);
+				return this;
+			},
+			get: function(url, data) {
+				var config = {
+					url: url,
+					methods: "get",
+				}
+				return this.ajax(url, config)
+			},
+			post: function(url, data) {
+				var config = {
+					url: url,
+					methods: "post",
+					data: data,
+				}
+				return this.ajax(url, config)
+			},
+			then: function(callback) {
+				var that = this;
+				var xhr = this.xhr;
+				this.xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4 && xhr.status == 200) {
+						var header = xhr.getAllResponseHeaders()
+						responseData = JSON.parse(xhr.responseText);
+						var response = {
+							config: that.config,
+							header: xhr.getAllResponseHeaders(),
+							data: responseData,
+							request: xhr,
+							status: responseData.status,
+							statusText: responseData.statusText
+						}
+						callback(response)
+					}
+				}
+			},
+			catch: function(callback) {
+				var xhr = this.xhr;
+				this.xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4 && xhr.status !== 200) {
+						var response = JSON.parse(xhr.responseText)
+						callback(response)
+					}
+				}
+			}
+		}
+		//调用
+		axios.get(window.DSIP_URL + "/IndexFriendshipLink/queryAll?incubatorIds=1")
+			.then(function(res){
+				debugger
+		})
+	</script>
+
+</html>

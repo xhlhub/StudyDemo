@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				margin: 0;
+				padding: 0;
+			}
+			img{
+				width: 150px;
+				height: 150px;
+			}
+			.row{
+				margin-bottom: 10px;
+				float: left;
+				width: 250px;
+				padding: 20px;
+			}
+			.row>div{
+				width: 250px;
+				height: 250px;
+				border: 1px solid #333333;
+			}
+			
+			.box1{
+				position: relative;
+			}
+			.box1 img{
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+			.box2{
+				position: relative;
+				text-align: center;
+			}
+			.box2 img{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -75px;
+				margin-top: -75px;
+			}
+			.box3{
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+			}
+			.box4{
+				text-align: center;
+			}
+			.box4 img{
+				vertical-align: middle;
+			}
+			.box4 span{
+				display: inline-block;
+				height: 100%;
+				vertical-align: middle;
+				width: 0px;
+			}
+			.box5{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="row">
+			<h3>1、定位+margin:auto</h2>
+				<p>无条件，应用广泛</p>
+			<div class="box1">
+				<img src="a.jpg"/>
+			</div>			
+		</div>
+		<div class="row">
+			<h3>2、定位+top:50%</h2>
+				<p>img已知宽高</p>
+			<div class="box2">
+				<img src="a.jpg"/>
+			</div>			
+		</div>
+		<div class="row">
+			<h3>3、display:tabel-cell</h2>
+				<p>img父元素tabel-cell</p>
+			<div class="box3">
+				<img src="a.jpg"/>
+			</div>			
+		</div>
+		
+		<div class="row">
+			<h3>4、vertical-align:middle</h2>
+				<p>插入一个空兄弟元素span</p>
+			<div class="box4">
+				<span></span>
+				<img src="a.jpg"/>
+			</div>			
+		</div>
+		<div class="row">
+			<h3>5、flex</h2>
+				<p>flex布局</p>
+			<div class="box5">
+				<span></span>
+				<img src="a.jpg"/>
+			</div>			
+		</div>
+	</body>
+</html>

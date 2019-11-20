@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//一：数据属性(可以读取、写入)
+		
+		var obj={
+			age:10//这种方式定义属性三个特征默认都为true,value默认为undefined，即：可删除/定义、可写、可枚举、可赋值
+		}
+		
+		Object.defineProperty(obj,"name",{//这种定义的每个特征默认为false
+			
+			configurable:true,//1：可删除 2：可修改属性特征。
+			
+			writable:true,//可写
+			
+			enumerable:true,//可枚举
+			
+			value:"aa"//属性值
+		})
+		
+	</script>
+	<script type="text/javascript">
+/*		//二：访问器属性
+		var obj ={
+			_year:2019,
+		}
+		Object.defineProperty(obj,"year",{
+//			enumerable:true,//这种创建默认false
+			get:function(){
+				return this._year
+			},
+			set:function(val){
+				this._year = val
+			}
+		})
+		for (let key in obj) {
+			console.log(obj[key])
+		}
+//		obj._year;
+//		obj.year;
+		obj.year=2018;*/
+		
+		var obj ={
+			_year:2019,
+			get year(){
+				return this._year
+			}
+		}
+		obj;
+		debugger
+	</script>
+</html>

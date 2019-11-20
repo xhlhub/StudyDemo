@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				border: 1px solid #eee;
+				background: #333;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="600"></canvas>
+	</body>
+	<script type="text/javascript">
+	if (!window.requestAnimationFrame) {
+	    window.requestAnimationFrame = function(fn) {
+	        setTimeout(fn, 17);
+	    };
+	}
+	</script>
+	<script type="text/javascript" src="dot.js"></script>
+	<!--<script type="text/javascript" src="dot-cache.js"></script>-->
+	<script type="text/javascript">
+	var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+    var canvasWidth = canvas.width;
+    var canvasHeight = canvas.height;
+    var img = document.createElement('img');
+    img.src='./snow2.jpg';
+    
+	var store=[],num = 30;
+	for (let i=0;i<num;i++) {
+		let x= Math.random()*canvasWidth;
+		let y= Math.random()*canvasHeight;
+		let r= parseInt(Math.random()*2)+1.5;
+		let speedX= 1.5 - Math.random()*3;
+		let speedY= 1.5 - Math.random()*3;
+		new Dot(x,y,r,speedX,speedY)
+	}	
+	</script>
+	<script type="text/javascript">
+		/*绘制一个运动的圆点
+		 * */
+		
+//	    var canvas = document.getElementById('canvas');
+//	    var ctx = canvas.getContext("2d");
+//	    
+//		let y = 200,r = 50,x = r+0.5;
+//		
+//		animate();
+//		
+//		function animate(){
+//			if(x>(canvas.width-r-0.5)){return}
+//			ctx.clearRect(0, 0, canvas.width, canvas.height);
+//			x+=2;
+//			draw(x,y,r);
+//			requestAnimationFrame(animate);
+//		}
+//		function draw(x,y,r){
+//			ctx.beginPath();
+//		    ctx.fillStyle = "pink";
+//		    ctx.arc(x,y,r,Math.PI*2,false)
+//		    ctx.fill()
+//		}		
+	</script>
+	<script type="text/javascript">
+/*
+ * 绘制多个圆点
+ 	对象方法oop
+ * */
+//	var canvas = document.getElementById('canvas');
+//  var ctx = canvas.getContext("2d");
+//  var canvasWidth = canvas.width;
+//  var canvasHeight = canvas.height;
+//  
+//	function Dot(y,r,speedY=1){
+//		this.x=r;
+//		this.y=y;
+//		this.r=r;
+//		this.speedY=speedY;
+//		this.animate();
+//	}
+//	Dot.prototype={
+//		draw:function(){
+//			ctx.beginPath();
+//		    ctx.fillStyle = "pink";
+//		    ctx.arc(this.x,this.y,this.r,Math.PI*2,false)
+//		    ctx.fill()
+//		},
+//		animate:function (){
+//			if(this.x>(canvas.width-this.r-0.5)){return}
+//			ctx.clearRect(this.x-this.r-0.5,this.y-this.r,2*this.r+1, 2*this.r);
+//			this.x+=this.speedY;
+//			this.draw(this.x,this.y,this.r);
+//			let that = this;
+//			requestAnimationFrame(function(){
+//				that.animate()
+//			})
+//		}
+//	}
+//	
+//	var store=[],num = 50;
+//	for (let i=0;i<num;i++) {
+//		let r= parseInt(Math.random()*6)+8;
+//		let y= parseInt(Math.random()*(canvasWidth/num/3))+(canvasWidth/num/2);
+//		let speedY= Math.random()*3+0.2;
+//		if(store[i-1]){
+//			let offsetY= store[i-1].y+r;
+//			y = y+offsetY;
+//		}
+//		store[i]={
+//			y:y,
+//			r:r
+//		}
+//		new Dot(y,5,speedY)
+//	}	
+	</script>
+
+</html>
