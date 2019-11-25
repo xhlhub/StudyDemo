@@ -123,7 +123,18 @@
 //		常见用法：
 //		异步操作和定时器放在一起，，如果定时器先触发，就认为超时，告知用户；
 //		例如我们要从远程的服务家在资源如果5000ms还没有加载过来我们就告知用户加载失败
-
+		
+//		let p1 = new Promise(function(resolve,reject){
+//			window.setTimeout(()=>{
+//				reject('time out')
+//			},500)
+//		})
+//		let p1 = new Promise(function(resolve,reject){
+//			window.setTimeout(()=>{
+//				resolve('success')
+//			},1000)
+//		})
+//		new Promise.all([p1,p2])
 	
 
 /*
@@ -223,17 +234,16 @@ reject触发导致: pending→rejected*/
 			},1000)
 		})
 	}
-	function a(){
-		return false
-	}
 	console.time()
-	
 	sleep()
 	.then(()=>{
+		debugger
 		sleep()
 	})
 	.then(()=>{
+		debugger
 		console.timeEnd()
 	})
+
 </script>
 </html>
