@@ -31,25 +31,51 @@
 //		mao1.type;
 	</script>
 	<script type="text/javascript">
-		class Animal {
-			constructor(sex){
-				this.sex=sex
-			}
-		}
-		Animal.prototype.type="animal";
-		
-		class Cat extends Animal{
-			constructor(sex,name){
-				super(sex)
-				this.name = name;
-			}
-			say(){
-				alert("miao~~~")
-			}
-		}
-		Cat.prototype.kind="mao"
-		var mao1 = new Cat("man","mao1");	
-		mao1.type
-		debugger
+//		class Animal {
+//			constructor(sex){
+//				this.sex=sex
+//			}
+//		}
+//		Animal.prototype.type="animal";
+//		
+//		class Cat extends Animal{
+//			constructor(sex,name){
+//				super(sex)
+//				this.name = name;
+//			}
+//			say(){
+//				alert("miao~~~")
+//			}
+//		}
+//		Cat.prototype.kind="mao"
+//		var mao1 = new Cat("man","mao1");	
+//		mao1.type
 	</script>
+	<script type="text/javascript">
+		function Person (){}
+		Person.prototype={
+			kind:"person",
+			think:function(){
+				console.log('I can think...')
+			}
+		}
+//		
+//		var man = new Person()
+//		
+//		man.sex="man"
+//		
+//		var song = {}
+//		
+//		song.__proto__ = man
+//		等同于
+//		Object.setPrototypeOf(song,man)
+		function Man (){}
+		Man.prototype = new Person()
+		
+		var song = new Man()
+		
+		song.__proto__.__proto__ == Person.prototype
+		Man.__proto__ == Person
+		debugger
+</script>
 </html>
