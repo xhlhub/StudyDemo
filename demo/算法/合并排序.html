@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+/*
+ 合并排序：合并俩个有序数组o(n)
+ 过程：
+ 俩个递增的，从前往后比较，谁小谁下去
+ 注意：俩个数组方向必须一致!!!,递增的，小的放下去；递减的，大的放下去
+ * */
+		function merge(left,right){
+			let result = [];
+			let il=0,ir=0;
+//			j=0;
+			while(il<left.length||ir<right.length){
+//				j++;
+				if(left[il]<right[ir]){
+					result.push(left[il]);
+					il++
+				}else{
+					result.push(right[ir]);
+					ir++
+				}
+			}
+//			console.log(j)
+			return result
+		}
+		var left=[1,4,8,12],right=[2,3,11,25,30];
+		
+		console.log(merge(left,right).reverse())
+	</script>
+</html>

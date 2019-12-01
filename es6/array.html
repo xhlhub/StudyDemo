@@ -7,11 +7,56 @@
 	<body>
 	</body>
 	<script type="text/javascript">
+//		find(x=>x==2)   找到符合条件的第一个元素并返回该元素//["a","b"].find(x=>x>'a')//b
+//		findIndex  找到符合条件的第一个元素并返回索引
+//		includes    判断是否包含某个元素,indexOf的替身 //["a","b"].includes("a")//0
+//		of 			转化数组方法，Array()优化版//   Array.of(2)  //[2]
+//		from		将一个类数组和可遍历对象转化为数组  //Array.from('abc') //['a','b','c']
 		let arr = [1,2,3];
-		let result = arr.reduce((prev, cur, index, arr)=> {
-			debugger
-		    return prev + cur;
-		});
-		console.log(result)
+//		let result = arr.reduce((prev, cur, index, arr)=> {
+//		    return prev + cur;
+//		});
+//		console.log(result)6
+//		console.log(arr.find((x)=>x==2))
+//		console.log(arr.findIndex((x)=>x==2))
+//		let set1 = new Set([1,2,3])
+//		console.log(Array.from(set1))//[1,2,3]
+//		console.log(Array.of(set1))//[Set(3)]
+		
+//		let obj ={
+//			name:"a",
+//			age:"b",
+//		}
+//		console.log(Array.from(obj))//[1,2,3]
+//		console.log(Array.of(obj))//[Set(3)]		
+		
+//		let obj ={
+//			1:'second',
+//			age:"b",
+//			0:"first",
+//			name:"a",
+//			
+//			length:2
+//		}
+//		console.log(Array.from(obj))//[1,2,3]
+//		console.log(Array.of(obj))//[Set(3)]		
+		let array1 = [
+		{
+			name:"mao",
+			age:10
+		},
+		{
+			name:"kity",
+			age:12
+		}
+		]
+		for (let index of array1.keys()) {
+			console.log(index)
+		}
+		//0,1
+		for (let item of array1.values()) {
+			console.log(item.age)
+		}
+		//10,12
 	</script>
 </html>
