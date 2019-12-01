@@ -31,25 +31,65 @@
 //		mao1.type;
 	</script>
 	<script type="text/javascript">
-		class Animal {
-			constructor(sex){
-				this.sex=sex
-			}
-		}
-		Animal.prototype.type="animal";
 		
-		class Cat extends Animal{
-			constructor(sex,name){
-				super(sex)
-				this.name = name;
-			}
-			say(){
-				alert("miao~~~")
-			}
-		}
-		Cat.prototype.kind="mao"
-		var mao1 = new Cat("man","mao1");	
-		mao1.type
-		debugger
+		//判断构造函数直接调用还是new调用方法
+		
+		
+//		1:严格模式下 直接调用 this=undefined
+//		function Symbols() {
+//          'use strict'
+//          console.log(this === undefined)//new 为  false
+//      }
+		//2: instanceof
+//		function Symbols(params){
+//			console.log(this instanceof Symbols)//new 为  true
+
+		//2: new.target
+//			console.log(new.target == Symbols)//new 为  true
+//		}
+
+		
+		//实现一个Symbols：
+		//1：每次调用返回不同值
+		//2：for调用，如果key一样，返回相同值
+		//3：new调用报错
+//		var Symbols = function Sy(){
+//			var id = 0;
+//			return function Ex(){
+//				if(this instanceof Ex){
+//					console.error('非构造函数！')
+//				}
+//				return ++id
+//			}
+//		}()
+//		Symbols.for=function(key){
+//			return key
+//		}
+//		console.log(Symbols())
+//		console.log(Symbols('b'))
+//		console.log(Symbols.for('b')==Symbols.for('b'))
+//		new Symbols()
+		
+	</script>
+	<script type="text/javascript">
+//		class Animal {
+//			constructor(sex){
+//				this.sex=sex
+//			}
+//		}
+//		Animal.prototype.type="animal";
+//		
+//		class Cat extends Animal{
+//			constructor(sex,name){
+//				super(sex)
+//				this.name = name;
+//			}
+//			say(){
+//				alert("miao~~~")
+//			}
+//		}
+//		Cat.prototype.kind="mao"
+//		var mao1 = new Cat("man","mao1");	
+//		mao1.type
 	</script>
 </html>

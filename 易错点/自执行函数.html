@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//报错
+			function a(){
+				
+			}()
+			
+			//正确：
+			
+			var a =function adw(){
+				
+			}()
+			
+			function adw(){
+				return function(){
+					
+				}()
+			}
+			
+			(function adw(){
+
+			})()
+		</script>
+	</body>
+</html>
