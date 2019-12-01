@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			//复杂度 o(n*log2 N)
+			var arr1 = [8,2,5,32,9,1];
+			function quickSort(arr){
+				if(arr.length<1){
+					return arr
+				}
+				var flag = arr[0];
+				let left = [],right = [];
+				for (let i = 1;i<arr.length;i++) {
+					if(arr[i]<flag){
+						left.push(arr[i])
+					}else{
+						right.push(arr[i])
+					}
+				}
+				return [ ...quickSort(left),flag,...quickSort(right)]
+			}
+			
+//			console.log(quickSort(arr1))
+//			空间占用大
+//			原地快排
+			// function quickSort(arr){
+			// 	var flag = arr[0]
+				
+			// }
+			
+			// function itemSort (arr,i,j){
+			// 	for (let i = i;i<arr.length;i++) {
+			// 		if(flag>arr[i]){
+			// 			for (let j = j;j>i;j--) {
+			// 				if(arr[j]<flag){
+			// 					let temp = arr[i];
+			// 					arr[i] = arr[j];
+			// 					arr[j] = temp;
+			// 					if(i>=j-1){
+									
+			// 					}
+			// 					i++;
+			// 					j--;
+			// 					itemSort(arr,i,j)
+			// 				}
+			// 			}
+			// 		}
+			// 	}
+			// }
+		</script>
+	</body>
+</html>
