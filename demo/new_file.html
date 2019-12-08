@@ -15,6 +15,7 @@
 				enumable:true,
 				
 			})
+<<<<<<< HEAD
 			
 			var x=0
 			while(x<=10){
@@ -24,6 +25,21 @@
 			
 			
 			
+=======
+			var obj={
+				a:1
+			}
+			
+			window.setInterval(function(){
+				console.log(obj.a)
+			},100)
+			
+			Object.defineProperty(obj,'a',{
+				get : function(){
+					return "a"
+				}
+			})
+>>>>>>> 881058c24cf1b672fd6ba44b05d10f70386bfca9
 		</script>
 	</body>
 </html>
