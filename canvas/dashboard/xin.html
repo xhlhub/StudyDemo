@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<title></title>
+	</head>
+	<body>
+		<canvas  id="" width="600"  height="600"></canvas>
+	</body>
+	<script type="text/javascript">
+		
+		var canvas = document.querySelector('canvas');
+		
+		var context = canvas.getContext('2d');
+		
+		const canvasWidth = canvas.width,
+			  canvasHeight = canvas.height;
+		
+		const startAngle = Math.PI/6*5,//开始角度
+			rangeAngle = Math.PI/3*4,//最大弧度范围
+			x = canvasWidth/2,//原点x
+			y = canvasHeight*0.6,//原点y坐标
+			r = x*0.8 ;//半径
+			
+		context.lineWidth = 30;//线条的宽度
+		context.lineCap = "round";
+		
+		drawBackground()
+		
+		// drawMax()
+		
+		// drawMedium()
+		
+		// drawMin()
+		
+		animationMax(0)
+		
+		function animationMax(ic){
+			const value = 0.8;
+			drawMax(ic)
+			if(ic<=value){
+				requestAnimationFrame(animationMax(ic+=0.0001))
+			}
+		}
+		
+		/* 
+		画背景 
+		 */
+		function drawBackground(){
+			drawArc(x, y, 200, startAngle, rangeAngle,"#D2D5E7")
+		}
+		
+		/*
+		画大弧 
+		 */
+		function drawMax(percent){
+			drawArc(x, y, 200, startAngle, rangeAngle*percent,"#F7744D")
+		}
+		
+		/*
+		画中弧 
+		 */
+		function drawMedium(percent){
+			drawArc(x, y, 200, startAngle, rangeAngle*percent,"#FFC765")
+		}
+		
+		/*
+		画小弧 
+		 */
+		function drawMin(percent){
+			drawArc(x, y, 200, startAngle, rangeAngle*percent,"#264AD0")
+		}
+		
+		/* 
+		画弧线 
+		 */
+		function drawArc(x,y,r,startA,rangeA,color){
+			context.beginPath();
+			context.strokeStyle = color;//线条的颜色
+			context.arc(x,y,r,startA, startA+rangeA);
+			context.stroke()
+		}
+	</script>
+</html>
