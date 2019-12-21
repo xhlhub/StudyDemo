@@ -4,72 +4,144 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<title></title>
+		<style type="text/css">
+			body{
+				transform: translateZ(0);
+			}
+		</style>
 	</head>
 	<body>
-		<canvas  id="" width="600"  height="600"></canvas>
+		<canvas  id="" width="500"  height="500"></canvas>
 	</body>
 	<script type="text/javascript">
+		window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+		if (!window.requestAnimationFrame) {
+		    window.requestAnimationFrame = function(fn) {
+		        setTimeout(fn, 17);
+		    };
+		}
+	</script>
+	<script type="text/javascript">
 		
-		var canvas = document.querySelector('canvas');
-		
-		var context = canvas.getContext('2d');
+		let canvas = document.querySelector('canvas');
+		let context = canvas.getContext('2d');
 		
 		const canvasWidth = canvas.width,
 			  canvasHeight = canvas.height;
+			  
+		if (window.devicePixelRatio) {
+		   canvas.style.width = canvasWidth + "px";
+		   canvas.style.height = canvasHeight + "px";
+		   canvas.height = canvasHeight * window.devicePixelRatio;
+		   canvas.width = canvasWidth * window.devicePixelRatio;
+		   context.scale(window.devicePixelRatio, window.devicePixelRatio);
+		}	
 		
-		const startAngle = Math.PI/6*5,//开始角度
-			rangeAngle = Math.PI/3*4,//最大弧度范围
-			x = canvasWidth/2,//原点x
+		const startAngle = Math.PI/6*5, //开始角度
+			rangeAngle = Math.PI/3*4, //最大弧度范围
+			x = canvasWidth/2, //原点x坐标
 			y = canvasHeight*0.6,//原点y坐标
 			r = x*0.8 ;//半径
 			
-		context.lineWidth = 30;//线条的宽度
-		context.lineCap = "round";
+		context.lineWidth = 20;//线条的宽度
+		context.lineCap = "round";//线条的形状
 		
-		drawBackground()
+		//开始画
+		drawBackground()//画灰色背景
+		animationMax(1.2,0.8)
+		animationMedium(0.5,0.8,0.4)
+		animationMin(0.3,0.8,1.2)
+		//结束画
 		
-		// drawMax()
-		
-		// drawMedium()
-		
-		// drawMin()
-		
-		animationMax(0)
-		
-		function animationMax(ic){
-			const value = 0.8;
-			drawMax(ic)
-			if(ic<=value){
-				requestAnimationFrame(animationMax(ic+=0.0001))
+		/**
+		 * @desc 绘制动画-大弧
+		 * @param {number} value - 弧的占比值(小数)
+		 * @param {number} duration - 动画时间(单位秒)
+		 * @param {number} delay - 延时(单位秒)
+		 */
+		function animationMax(value, duration = 0.6, delay = 0){
+			if(delay&& typeof(delay) === 'number' && delay>0){
+				setTimeout(()=>{animate(drawMax,value,duration)},delay*1000)
+			}else{
+				animate(drawMax,value,duration)
 			}
+		}
+		function animationMedium(value, duration = 0.6, delay = 0){
+			if(delay&& typeof(delay) === 'number' && delay>0){
+				setTimeout(()=>{animate(drawMedium,value,duration)},delay*1000)
+			}else{
+				animate(drawMedium,value,duration)
+			}
+		}
+		function animationMin(value, duration = 0.6, delay = 0){
+			if(delay&& typeof(delay) === 'number' && delay>0){
+				setTimeout(()=>{animate(drawMin,value,duration)},delay*1000)
+			}else{
+				animate(drawMin,value,duration)
+			}
+		}
+		/**
+		 * @desc 绘图动画
+		 * @param {function} drawFun - 绘制方法
+		 * @param {number} value - 绘制圈的占比值(小数)
+		 * @param {number} duration - 动画时间(单位秒)
+		 */
+		function animate (drawFun,value,duration){
+			if(!value||typeof(value) != 'number'){return}
+			value = Math.min(value,1)
+			
+			let i =0;//角度
+			var now;
+			var then = Date.now()-16;
+			var interval;//刷新时间
+			var fps;//刷新率
+			
+			const render = function(i){
+				now = Date.now();
+				interval = now -then;
+				then = now;
+				drawFun(i)
+				fps = 1000/interval;
+				i+=value/fps/duration;//增量=总量/刷新率/时间
+				if(i<value){
+					requestAnimationFrame(()=>{
+						render(i)
+					})
+				}else{
+					drawFun(value)
+//					console.timeEnd()
+				}
+			}
+//			console.time()
+			render(i)			
 		}
 		
 		/* 
 		画背景 
 		 */
 		function drawBackground(){
-			drawArc(x, y, 200, startAngle, rangeAngle,"#D2D5E7")
+			drawArc(x, y, r, startAngle, rangeAngle,"#D2D5E7")
 		}
 		
 		/*
 		画大弧 
 		 */
 		function drawMax(percent){
-			drawArc(x, y, 200, startAngle, rangeAngle*percent,"#F7744D")
+			drawArc(x, y, r, startAngle, rangeAngle*percent,"#F7744D")
 		}
 		
 		/*
 		画中弧 
 		 */
 		function drawMedium(percent){
-			drawArc(x, y, 200, startAngle, rangeAngle*percent,"#FFC765")
+			drawArc(x, y, r, startAngle, rangeAngle*percent,"#FFC765")
 		}
 		
 		/*
 		画小弧 
 		 */
 		function drawMin(percent){
-			drawArc(x, y, 200, startAngle, rangeAngle*percent,"#264AD0")
+			drawArc(x, y, r, startAngle, rangeAngle*percent,"#264AD0")
 		}
 		
 		/* 
