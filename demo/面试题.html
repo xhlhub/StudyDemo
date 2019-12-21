@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+//		function indexOf(arr, item) {
+//		    for(let i=0;i<arr.length;i++){
+//		        if(arr[i] === item){
+//		            return i
+//		        }
+//		    }
+//		    return -1
+//		}
+		var arr = [1,2,3,4]
+//		console.log(indexOf(arr,3))
+//		
+		var sum = arr.reduce(function (prev, cur, index, arr) {
+		    return prev + cur;
+		},0);
+		
+		var max = arr.reduce(function (prev, cur, index, arr) {
+		    return Math.max(prev,cur);
+		},50);
+		debugger
+	</script>
+</html>

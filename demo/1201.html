@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+//		let obj ={
+//			name:"obj",
+//			on:()=>{
+//				console.log(this)
+//			},
+//			off:function(){
+//				console.log(this)
+//			}
+//		}
+//		obj.on()
+//		obj.off()
+		
+//		const full = ({ first, last }) =>first + ' ' + last;
+//		console.log(full({first:'Xie',last:"Hailong"}))//Xie hailong
+//		
+//		const full1 = ([first,]) =>first;
+//		console.log(full1(['Xie',"Hailong"]));//Xie
+
+        let obj1 = {
+        	name:"obj1",
+        	dosomething:function(param){
+        		console.log(this.name+' do '+param)
+        	}
+        }
+        let obj2 ={
+        	name:"obj2"
+        }
+        obj1.dosomething.call(obj2,'aaa')
+	</script>
+</html>
