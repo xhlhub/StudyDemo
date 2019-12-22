@@ -21,14 +21,14 @@
 				display: block;
 				margin: 50px auto;
 				background: url('kedu.png') no-repeat;
-				background-position: 49% 42%;
-    			background-size: 85%;
+				background-position: 49% 41%;
+    			background-size: 78%;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="canvas-container">
-			<canvas  id="" width="500"  height="500"></canvas>
+			<canvas  id="" width="560"  height="500"></canvas>
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -57,9 +57,10 @@
 		   canvas.width = canvasWidth * window.devicePixelRatio;
 		   context.scale(window.devicePixelRatio, window.devicePixelRatio);
 		}	
+		
 		const x = canvasWidth/2, //原点x坐标
 			y = canvasHeight*0.6,//原点y坐标
-			r = x*0.66 ,//半径
+			r = x*0.6 ,//半径
 			startAngle = Math.PI*5/6, //开始角度
 			rangeAngle = Math.PI*4/3 , //最大弧度范围
 			arcWidth = 30 ;
@@ -88,7 +89,7 @@
 				arcObj.animationMin(minValue,duration,duration*2)	
 				//---画圈end---//		    
 				
-				//---画指针---//	
+				//---画指针 start---//	
 				let drawPointerParams={
 					context,
 					imgPionter,
@@ -99,9 +100,33 @@
 					r
 				}
 				animatePointer(minValue,duration,duration*2,drawPointerParams)
+				//---画指针end---//
+				
+//				drawMinPortrait(context,x,y,r,startAngle,rangeAngle,duration*3,minValue)
 			}
 		}
-		//指针
+		function drawMinPortrait(context,x,y,r,startAngle,rangeAngle,delay,minValue){
+			let img = new Image();
+			img.src = 'portrait-min.png';
+			let angle = -Math.PI/6+rangeAngle*minValue;//旋转角度
+			
+			setTimeout(()=>{
+				var cacheCanvas = document.createElement("canvas");
+				var cacheCtx = cacheCanvas.getContext('2d');
+				cacheCanvas.width=100;
+				cacheCanvas.height=100;
+				context.translate(50, 50);
+				cacheCtx.rotate(-angle);
+				cacheCtx.drawImage(img, -25, -25,50,50)
+				
+				
+				context.save(); //保存坐原点平移之前的状态
+			    context.translate(x, y);
+			    context.rotate(angle);
+				context.drawImage(cacheCanvas, -r-110, -25,50,50)
+				context.restore();				
+			},delay*1000)
+		}
 	</script>
 	<script type="text/javascript">
 		
