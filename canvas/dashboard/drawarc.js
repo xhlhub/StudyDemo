@@ -1,58 +1,10 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<title></title>
-		<style type="text/css">
-			body{
-				transform: translateZ(0);
-			}
-		</style>
-	</head>
-	<body>
-		<canvas  id="" width="500"  height="500"></canvas>
-	</body>
-	<script type="text/javascript">
-		window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-		if (!window.requestAnimationFrame) {
-		    window.requestAnimationFrame = function(fn) {
-		        setTimeout(fn, 17);
-		    };
+	function drawarc(x, y, r, startAngle, rangeAngle){
+		return {
+			drawBackground:drawBackground,
+			animationMax:animationMax,
+			animationMedium:animationMedium,
+			animationMin:animationMin
 		}
-	</script>
-	<script type="text/javascript">
-		
-		let canvas = document.querySelector('canvas');
-		let context = canvas.getContext('2d');
-		
-		const canvasWidth = canvas.width,
-			  canvasHeight = canvas.height;
-			  
-		if (window.devicePixelRatio) {
-		   canvas.style.width = canvasWidth + "px";
-		   canvas.style.height = canvasHeight + "px";
-		   canvas.height = canvasHeight * window.devicePixelRatio;
-		   canvas.width = canvasWidth * window.devicePixelRatio;
-		   context.scale(window.devicePixelRatio, window.devicePixelRatio);
-		}	
-		
-		const startAngle = Math.PI/6*5, //开始角度
-			rangeAngle = Math.PI/3*4, //最大弧度范围
-			x = canvasWidth/2, //原点x坐标
-			y = canvasHeight*0.6,//原点y坐标
-			r = x*0.8 ;//半径
-			
-		context.lineWidth = 20;//线条的宽度
-		context.lineCap = "round";//线条的形状
-		
-		//开始画
-		drawBackground()//画灰色背景
-		animationMax(1.2,0.8)
-		animationMedium(0.5,0.8,0.4)
-		animationMin(0.3,0.8,1.2)
-		//结束画
-		
 		/**
 		 * @desc 绘制动画-大弧
 		 * @param {number} value - 弧的占比值(小数)
@@ -79,7 +31,7 @@
 			}else{
 				animate(drawMin,value,duration)
 			}
-		}
+		}		
 		/**
 		 * @desc 绘图动画
 		 * @param {function} drawFun - 绘制方法
@@ -152,6 +104,6 @@
 			context.strokeStyle = color;//线条的颜色
 			context.arc(x,y,r,startA, startA+rangeA);
 			context.stroke()
-		}
-	</script>
-</html>
+		}		
+		
+	}
