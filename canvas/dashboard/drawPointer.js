@@ -37,15 +37,11 @@ function animatePointer(value, duration, delay = 0,drawPrams){
 		}
 		
 function drawPointer(drawPrams,startAngleRotate,i){
-	
 		const { context,imgPionter,startAngle,rangeAngle,x,y,r} = drawPrams ;
 	  context.save(); //保存坐原点平移之前的状态
-      context.translate(x, y,r);
-      
-      context.rotate(startAngleRotate+i*rangeAngle);
-    //context.fillRect(r*0.036+1,15,-r*0.072-2,-r*0.72-15)  
+    context.translate(x, y);
+    context.rotate(startAngleRotate+i*rangeAngle);
     context.clearRect(r*0.036+3,15,-r*0.072-6,-r*0.72-15);  
 	  context.drawImage(imgPionter, -r*0.036, -r*0.72+5,r*0.072,r*0.72)
-
 	  context.restore();
 }
