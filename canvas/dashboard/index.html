@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<title></title>
+		<style type="text/css">
+			body{
+				transform: translateZ(0);
+				background: url();
+			}
+			#canvas-container{
+				width: 560px;
+				height: 700px;
+				margin:0 auto;
+				background: url('bg.png')  no-repeat ;
+				background-size: cover;
+				border-radius: 40px;
+			}
+			canvas{
+				display: block;
+				margin: 50px auto;
+				background: url('kedu.png') no-repeat;
+				background-position: 49% 42%;
+    			background-size: 85%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="canvas-container">
+			<canvas  id="" width="500"  height="500"></canvas>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+		if (!window.requestAnimationFrame) {
+		    window.requestAnimationFrame = function(fn) {
+		        setTimeout(fn, 17);
+		    };
+		}
+	</script>
+	<script src="drawarc.js" type="text/javascript" charset="utf-8"></script>
+	<script src="drawPointer.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		let canvas = document.querySelector('canvas');
+		let context = canvas.getContext('2d');
+		
+		const canvasWidth = canvas.width,
+			  canvasHeight = canvas.height;
+		
+		//通过缩放提高细腻度
+		if (window.devicePixelRatio) {
+		   canvas.style.width = canvasWidth + "px";
+		   canvas.style.height = canvasHeight + "px";
+		   canvas.height = canvasHeight * window.devicePixelRatio;
+		   canvas.width = canvasWidth * window.devicePixelRatio;
+		   context.scale(window.devicePixelRatio, window.devicePixelRatio);
+		}	
+		const x = canvasWidth/2, //原点x坐标
+			y = canvasHeight*0.6,//原点y坐标
+			r = x*0.66 ,//半径
+			startAngle = Math.PI*5/6, //开始角度
+			rangeAngle = Math.PI*4/3 , //最大弧度范围
+			arcWidth = 30 ;
+		context.lineWidth = arcWidth;//线条的宽度
+		context.lineCap = "round";//线条的形状
+		
+		//开始绘制
+		drawDashboard(context,0.8,0.5,0.3)
+		
+		/**
+		 * @desc 绘制方法
+		 * @param {number} maxValue - 大弧占比
+		 * @param {number} midumValue - 中弧占比
+		 * @param {number} minValue - 小弧占比
+		 */
+		function drawDashboard(context,maxValue,midumValue,minValue){
+			let imgPionter = new Image();
+			imgPionter.src = 'pointer.png';
+			imgPionter.onload = function(){
+				//---画圈start---//
+				let arcObj = drawarc(x, y, r, startAngle, rangeAngle)
+				arcObj.drawBackground()//画灰色背景
+				const duration = 0.8;//动画
+				arcObj.animationMax(maxValue,duration)
+				arcObj.animationMedium(midumValue,duration,duration)
+				arcObj.animationMin(minValue,duration,duration*2)	
+				//---画圈end---//		    
+				
+				//---画指针---//	
+				let drawPointerParams={
+					context,
+					imgPionter,
+					startAngle,
+					rangeAngle,
+					x,
+					y,
+					r
+				}
+				animatePointer(minValue,duration,duration*2,drawPointerParams)
+			}
+		}
+		//指针
+	</script>
+	<script type="text/javascript">
+		
+	</script>
+
+</html>
