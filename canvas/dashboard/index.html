@@ -40,6 +40,7 @@
 	</script>
 	<script src="drawarc.js" type="text/javascript" charset="utf-8"></script>
 	<script src="drawPointer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="drawPortrait.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		
 		let canvas = document.querySelector('canvas');
@@ -57,6 +58,7 @@
 		   context.scale(window.devicePixelRatio, window.devicePixelRatio);
 		}	
 		
+		//绘制参数
 		const x = canvasWidth/2, //原点x坐标
 			y = canvasHeight*0.6,//原点y坐标
 			r = x*0.6 ,//半径
@@ -67,7 +69,7 @@
 		context.lineCap = "round";//线条的形状
 		
 		//开始绘制
-		drawDashboard(context,0.8,0.5,0.3)
+		drawDashboard(context,0.9,0.7,0.3)
 		
 		/**
 		 * @desc 绘制方法
@@ -81,8 +83,8 @@
 			imgPionter.onload = function(){
 				//---画圈start---//
 				let arcObj = drawarc(x, y, r, startAngle, rangeAngle)
-				arcObj.drawBackground()//画灰色背景
 				const duration = 0.8;//动画
+				arcObj.drawBackground()//画灰色背景
 				arcObj.animationMax(maxValue,duration)
 				arcObj.animationMedium(midumValue,duration,duration)
 				arcObj.animationMin(minValue,duration,duration*2)	
@@ -101,30 +103,12 @@
 				animatePointer(minValue,duration,duration*2,drawPointerParams)
 				//---画指针end---//
 				
-//				drawMinPortrait(context,x,y,r,startAngle,rangeAngle,duration*3,minValue)
+				//---画头像start---//
+				drawPortrait(context,x,y,r,startAngle,rangeAngle,duration*3,minValue,'portrait-min.png',true)//绘制小圈头像（我）
+				drawPortrait(context,x,y,r,startAngle,rangeAngle,duration*3,midumValue,'portrait-max.png')//绘制中圈头像）
+				drawPortrait(context,x,y,r,startAngle,rangeAngle,duration*3,maxValue,'portrait-max.png')//绘制大圈头像
+				//---画头像end---//
 			}
-		}
-		function drawMinPortrait(context,x,y,r,startAngle,rangeAngle,delay,minValue){
-			let img = new Image();
-			img.src = 'portrait-min.png';
-			let angle = -Math.PI/6+rangeAngle*minValue;//旋转角度
-			
-			setTimeout(()=>{
-				var cacheCanvas = document.createElement("canvas");
-				var cacheCtx = cacheCanvas.getContext('2d');
-				cacheCanvas.width=100;
-				cacheCanvas.height=100;
-				context.translate(50, 50);
-				cacheCtx.rotate(-angle);
-				cacheCtx.drawImage(img, -25, -25,50,50)
-				
-				
-				context.save(); //保存坐原点平移之前的状态
-			    context.translate(x, y);
-			    context.rotate(angle);
-				context.drawImage(cacheCanvas, -r-110, -25,50,50)
-				context.restore();				
-			},delay*1000)
 		}
 	</script>
 	<script type="text/javascript">
