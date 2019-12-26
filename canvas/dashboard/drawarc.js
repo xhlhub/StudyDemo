@@ -89,21 +89,21 @@
 			drawArc(x, y, r, startAngle, rangeAngle*percent,"#FFC765")
 		}
 		
-		/*
-		画小弧 
-		 */
-		function drawMin(percent){
-			drawArc(x, y, r, startAngle, rangeAngle*percent,"#264AD0")
-		}
-		
-		/* 
-		画弧线 
-		 */
-		function drawArc(x,y,r,startA,rangeA,color){
-			context.beginPath();
-			context.strokeStyle = color;//线条的颜色
-			context.arc(x,y,r,startA, startA+rangeA);
-			context.stroke()
-		}		
+
 		
 	}
+	/*
+	画小弧 
+	 */
+	function drawMin(percent){
+		drawArc(x, y, r, startAngle, rangeAngle*percent,"#264AD0")
+	}
+	/* 
+	画弧线 
+	 */
+	function drawArc(x,y,r,startA,rangeA,color){
+		context.beginPath();
+		context.strokeStyle = color;//线条的颜色
+		context.arc(x,y,r,startA, startA+rangeA);
+		context.stroke()
+	}	

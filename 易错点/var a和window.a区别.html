@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+
+		
+		var a = 1
+		window.b = 2
+		
+		delete window.a//不能删除
+		delete window.b//删除window.b
+		// delete b //删除window.b
+		
+		console.log(a)//1
+		console.log(b)//报错
+		
+		
+		/* 总结： */
+		
+		// var a      声明一个变量，变量不能删除
+		// window.a   window对象添加一个属性，可以删除
+		//window.a = 1      等于       a = 1
+	</script>
+</html>
