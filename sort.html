@@ -7,24 +7,41 @@
 	<body>
 	</body>
 	<script type="text/javascript">
-		var attr=[{
-			id:1,
-			sort:0,
-		},{
-			id:3,
-			sort:0
-		},{
-			id:2,
-			sort:0
-		}
-		]
-		var maps={1:1,2:2,3:3};
-		
-		attr.sort((a,b)=>{
-			a.sort = maps[a.id];
-			b.sort = maps[b.id];
-			return maps[a.id] -maps[b.id]
+// 		var attr=[{
+// 			id:1,
+// 			sort:0,
+// 		},{
+// 			id:3,
+// 			sort:0
+// 		},{
+// 			id:2,
+// 			sort:0
+// 		}
+// 		]
+// 		var maps={1:1,2:2,3:3};
+// 		
+// 		attr.sort((a,b)=>{
+// 			debugger
+// 			a.sort = maps[a.id];
+// 			b.sort = maps[b.id];
+// 			return maps[a.id] -maps[b.id]
+// 		})
+// 		console.log(attr)
+
+
+		let arr1 =[2,1,3,0,4]
+		let i =0
+		arr1.sort(function(cur,pre){
+			console.log(++i)
+			return cur-pre
 		})
-		console.log(attr)
+		console.log(arr1)
+/* 
+ 结论:
+ 1：a当前值，b之前值
+ 2：a-b为递增
+ 3：执行次数不等于数组长度，等于复杂度 
+ 
+ */
 	</script>
 </html>
