@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function foo(){
+			console.log(this)
+		}
+		
+		let obj ={
+			name:"obj",
+			back:foo,
+			foo:function(){
+				console.log(this)
+			}
+		}
+		
+		let obj1 = {
+			name:"obj1",
+			foo:obj.foo
+		}
+		foo()//window
+		obj.back()//obj
+		obj1.foo()//obj1
+		
+		
+		/* 
+		结论：this指向调用者 
+		 */
+		
+		window = null
+		console.log(window)
+	</script>
+</html>
