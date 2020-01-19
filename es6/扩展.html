@@ -8,13 +8,22 @@
 	</body>
 	<script type="text/javascript">
 		
-		function doSome(...a){
+		// function doSome(...a){
 			
+		// }
+		// let params = {
+		// 	name:"xiehla",
+		// 	value:22
+		// }
+		// doSome(1,2,3)
+		
+		
+		//用法2:合并对象/数组
+		var obj ={
+			name:"xhl",
+			height:"180cm"
 		}
-		let params = {
-			name:"xiehla",
-			value:22
-		}
-		doSome(1,2,3)
+		var obj1 = {...obj,...{name:"lf",age:26},sex:"man"}
+		console.log(obj1)
 	</script>
 </html>
