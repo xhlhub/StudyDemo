@@ -8,14 +8,15 @@
 	</body>
 	<script type="text/javascript">
 		// class Animal{
+		// 	_extent = "原型属性"
 		// 	constructor(){
-		// 		this.extent="动物界"
+		// 		this.extent="实例属性"
 		// 	}
 		// 	animation(){
 		// 		alert(this.extent)
 		// 	}
 		// }
-		
+		// console.log(new Animal())
 		// class Person extends Animal{
 		// 	constructor(name){
 		// 		super();
@@ -46,12 +47,48 @@
 		// var foo = new Foo()
 		// console.log(Foo.name)
 		
-		var arr = [0,1];
-		
-		arr.xhl = "000"
-		
-		arr.map(item=>{
-			console.log(item)
-		})//0,1
+		// 5：静态属性方法
+		// class Animal{
+		// 	static value = "animal"
+		// 	static say(){
+		// 		alert("我是动物")
+		// 	}
+		// }
+		// class Person extends Animal{}
+		// console.log("Person`s value is "+Person.value)
+		// console.log("Person`s say is "+Person.say)
+/* 
+总结：
+ */
+// 1:class实际上是构造函数的封装
+// 2:typeof ClassName === function
+// 3:class定义原型方法：直接写的函数都是定义在原型上,
+// 		   原型属性：
+		   // !!!!:P.prototype={}这种对class类不生效，需要Onject.assign(P.prototype,{})!!!!
+// 4:class定义实例属性：constructor函数定义、定义在class顶层的属性
+// 	       实例方法：constructor函数定义：this.fun
+// 5:constructor作用：
+// 	相当于构造函数
+// 	创造实例环境换返回实例环境this
+// 6:静态方法、静态属性
+// 	 class P{
+// 		static fun(){
+// 			this//指向类而不是实例
+// 		}
+// 		static a = 1  //(提案中)	 
+// 	 }
+// 	 子类继承父类静态方法和属性
+// 7:私有属性：只能在类的内部访问的方法和属性，外部不能访问
+// 	 class P{(提案中)
+// 		#fun(){}
+// 		#a = 1  //	 (提案中)
+		// say(){
+		// 	this.#a //1
+		// }
+// 	 }	
+	 // let p1 = new P()
+	 // p1.#a//报错
+	 
+// 8:new.target==>指向类本身
 	</script>
 </html>
