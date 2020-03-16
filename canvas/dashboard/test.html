@@ -1,32 +1,51 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
 		<title></title>
+		<style type="text/css">
+			#canvas-container{
+				width: 500px;
+				height: 500px;
+				margin:0 auto;
+				background-size: cover;
+				border-radius: 40px;
+			}
+			canvas{
+				display: block;
+				margin: 50px auto;
+				background: pink;
+			}
+			
+		</style>
 	</head>
 	<body>
-		<img src="zhi.png"/>
-		<canvas id="canvas" width="800" height="800"></canvas>
+		<div id="canvas-container">
+			<canvas  id="" width="300"  height="300">
+			</canvas>
+			<img src="" >
+		</div>
+		<script type="text/javascript">
+			let imgDom = document.querySelector('img')
+			let canvas = document.querySelector('canvas');
+			let context = canvas.getContext('2d');
+			
+			context.font = 'bold 35px Arial';
+			context.textAlign = 'center';
+			context.textBaseline = 'bottom';
+			context.fillStyle = '#ccc';
+			context.strokeText("Hello Canvas", 150, 100);
+			context.fillText("Hello Canvas", 180, 140); 
+			
+			let img = new Image();
+			img.src = './portrait-min.png';
+			 img.onload = function(){
+				 // context.drawImage(img,0,0,80,80)
+				 
+				 let strDataURI = canvas.toDataURL("image/jpeg");
+				 imgDom.src = strDataURI
+			 }
+			
+		</script>
 	</body>
-	<script type="text/javascript">
-	    var canvas=document.getElementById('canvas');
-	    canvas.width=800;
-	    canvas.height=800;
-	    var context=canvas.getContext('2d');
-	
-	    context.beginPath();
-	    context.arc(300, 300,100, 0, 1.5*Math.PI, false);
-	    context.lineWidth=5;
-	    context.strokeStyle="#005";
-	    context.stroke();
-	    context.closePath();
-	
-	    context.beginPath();
-	    context.arc(600, 300, 100, 0, 1.5*Math.PI, true);//逆时针
-	    context.lineWidth=5;
-	    context.strokeStyle="#005";
-	    context.stroke();
-	    context.closePath();
-
-	</script>
 </html>

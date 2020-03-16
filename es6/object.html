@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var obj ={
+			name:"xiehla",
+			age:22
+		}
+		let obj1 = Object.create(obj)
+		// obj1.__proto__ = {
+		// 	a:12
+		// }
+		// console.log(obj1)
+		
+		// let obj2 = Object.assign({},obj)
+		console.log(obj1)
+		
+		console.log(obj1.__proto__ === obj)
+		console.log(obj1 instanceof Object)
+	</script>
+</html>
