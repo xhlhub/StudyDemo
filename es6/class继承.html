@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+<script type="text/javascript">
+function Animal(){
+	this.move = function(){
+		alert('我可以动1')
+	}
+}	
+Object.assign(Animal.prototype,{
+	type:"animal"
+})
+
+let wh = new Animal()	
+function Person(){}
+Object.assign(Person.prototype,wh)
+Person.prototype.kind="person"
+
+
+let xhl = new Person()
+console.log(wh.type)
+console.log(xhl.type)
+	
+	
+</script>
+	</body>
+</html>
