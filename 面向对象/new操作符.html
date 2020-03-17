@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+<script type="text/javascript">
+	//测试 new  操作符
+	(function(){
+		
+	function Test0(){}	
+	function Test(){
+		return "a"
+	}
+	function Test1(){
+		return {
+			a:1
+		}
+	}
+	function Test2(){
+		this.name = "a"
+		return {
+			a:1
+		}
+	}
+//	console.log(new Test0())//{}
+//	console.log(new Test())//{}
+//	console.log(new Test1())//{a:1}
+//	console.log(new Test2())//{a:1}
+	
+	})()
+//总结：
+//new操作符会执行函数,并且默认return一个对象    test0
+//如果本身return一个非对象，则返回一个空对象       test
+//如果函数本身有return一个对象类型，则返回值为该对象 test1
+//如果函数本身有return,则构造函数自己的属性，都添加不上了 test2
+</script>
+
+<script type="text/javascript">
+	(function(){
+		//字符串构造函数生成vs字面量
+		var STR = new String("a")
+		console.log(STR)
+		
+		var str = "a"
+		console.log(str)
+		console.log(typeof STR,typeof str)//object string
+
+		//数字构造函数生成vs字面量
+		var NUM = new Number(1)
+		
+		var num = 1
+		
+		console.log(NUM,num)
+		
+				
+		//数组构造函数生成vs字面量vs... 
+		var ARR = new Array(10)//[empty × 10]
+		var ARR1 = Array.of(10)//[empty × 10]
+		
+		var arr = [10]//[10]
+		var arr1 = Array(10)//[10]
+		
+		console.log(ARR,ARR1,arr,arr1)
+		
+		//总结：
+//		1:通过构造函数生成的,都是对象
+//		2:简单数据类型的（字符串/数字),通过字面量和构造函数生成的,类型不一样
+//		3：数组构造函数生成，传参是长度
+//		4：每个类型都有自己的方法Number()，他们会转化成对应类型
+	})()
+</script>
+</html>

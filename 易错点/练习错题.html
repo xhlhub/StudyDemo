@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+
+//错题1：
+
+	var a = '0b11';
+	var b = '0x10';
+	var c = 070;
+	
+	console.log(parseInt(a))
+	
+	console.log(parseInt(b))
+	
+	console.log(parseInt(c))
+
+/*
+ 总结：
+ 1：二进制0b开头，八进制0开头 ，16进制0x开头
+ 2：parseint(a,b)；b表示输出的进制
+ 3：数字为字符串时，parseint输出有的不准确
+ * */
+
+//错题2
+	function test(a){
+	a=a+10;
+	}
+	var a=10;
+	test(a);
+	console.log(a);
+//总结：
+//函数接受参数以后，这个参数是独立的，存在于函数环境内的
+//这里test不接受a，和接受a，结果不一样
+
+//错题3
+var result = Math.round(11.5) + Math.round(-11.5);
+//总结
+//Math.round 四舍五入/负数时：五舍六入
+//Math.round(-0.5) -0  ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！易错！！！！！！！！！！
+//Math.round(-0.6) -1
+
+//Math.ceil() //向上取整
+//Math.ceil(1.1) 2
+//Math.ceil(-1.1) -1
+//Math.ceil(-1.6) -1
+
+//Math.floor() //向下取整
+//Math.floor(1.1) 1
+//Math.floor(-1.1) -2
+//Math.floor(-1.6) -2
+
+//错题4
+	//let i = 0;
+	//new Array(10).forEach(() => {
+	//i++;
+	//});
+	//console.log(i)//0，一次都不遍历
+	//总结：
+//		1:new Array(3)表示生成一个长度为3的空数组；相当于 var a = []; a.length = 3
+//		2:数组只遍历有值的元素！！！而不是遍历length次；包含foreach、map、等
+//		3:[undefined,null] 会遍历
+	</script>
+	
+</html>

@@ -1,0 +1,2 @@
+1：js异步加载 async  deffer等异步加载
+2：正则
