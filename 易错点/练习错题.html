@@ -65,6 +65,27 @@ var result = Math.round(11.5) + Math.round(-11.5);
 //		1:new Array(3)表示生成一个长度为3的空数组；相当于 var a = []; a.length = 3
 //		2:数组只遍历有值的元素！！！而不是遍历length次；包含foreach、map、等
 //		3:[undefined,null] 会遍历
-	</script>
 	
+	
+//错题5
+	console.log(null instanceof Object)//false
+	console.log(String instanceof Object)//true
+	
+	
+	
+//错题6
+//在原型上扩展的可枚举方法，会被for in循环出来//正确
+
+//错题7 ：变量提升
+	var foo=function(x,y){
+	return x-y;
+	}
+	function foo(x,y){
+	return x+y;
+	}
+	var num=foo(1,2);
+	console.log(num)
+	</script>
+
+
 </html>
