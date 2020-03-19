@@ -45,6 +45,19 @@ console.log(str.substr(1,3))//bcd
 console.log(str.slice(1,2)) //b
 console.log(str.slice(1,-1)) //bc
 
-/**/
+/*分割*/
+
+//split(separator: String, limit: Number): Array
+
+console.log("split",str.split())// ["abcd"]
+console.log("split",str.split(""))// ["a","b","c","d"]
+console.log("split",str.split("",2))// ["a","b"]
+/*
+ separator不穿，字符串直接转化成一个数组
+ separator为"",每个字符分割开
+ limit：返回的数组最大长度，不传不限制
+ * */
+
+
 	</script>
 </html>

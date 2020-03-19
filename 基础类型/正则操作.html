@@ -1,16 +1,205 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
+
 	<body>
+
 		<svg></svg>
 	</body>
+	<!--正则语法-->
 	<script type="text/javascript">
-		var str = "abcdefgde123";
-		let reg= /de/g;
-		var word ="de";
-		str.match(reg);
+		//原文:http://c.biancheng.net/view/5632.html		
+
+		/*描述字符*/
+
+		//		var str = `I am a    chinese
+		//		she is a girl`
+		//		var reg = /\n/g;
+		//		var reg1 = /\s/g;
+		//		str = str.replace(reg,"*")
+		//		console.log(str)
+		//		str = str.replace(reg1,"")
+		//		console.log(str)
+		//		str = str.replace(/\*/g,"\n")
+		//		console.log(str)
+
+		/*
+		.	查找单个字符，除了换行和行结束符
+		\w	查找单词字符,字母/数字/下划线
+		\W	查找非单词字符
+		\d	查找数字
+		\D	查找非数字字符
+		\s	查找空白字符
+		\S	查找非空白字符
+		\b	匹配单词边界
+		\B	匹配非单词边界
+		\0	查找 NUL字符
+		\n	查找换行符
+		\f	查找换页符
+		\r	查找回车符
+		\t	查找制表符
+		\v	查找垂直制表符
+		\xxx	查找以八进制数 xxxx 规定的字符
+		\xdd	查找以十六进制数 dd 规定的字符
+		\uxxxx	查找以十六进制 xxxx规定的 Unicode 字符
+		 * */
+
+		/*选择匹配*/
+		//var str = "abc abd abe abf"
+		//var reg = /(abc)|(abe)|(abf)/g;
+		//console.log(str.match(reg))
+		//var str = "abcd1*234-^*%$&";
+		//var reg = /[^\d|\w]/g;
+		//console.log(str.match(reg))
+		/*
+		 注意|俩边别加空格
+		 * */
+
+		/*描述字符范围*/
+
+		/*
+		 [abc]  查找[]种任何一个字符
+		 [^abc] 查找非[]种任何一个字符
+		 [A-z]  -中表示ASC||范围，必须从小到大,[9-0]不行；与之区别不带-不限制，[cba]和[abc]一样
+		 [0-z]  只要是ASC||从小到大都可以；补充ASC||顺序：0-9  A-Z  a-z
+		 [0-9]  
+		 [AC-Z] 可以组合；表示A和C-Z，除B以外的大写字母
+		 * */
+
+		/*描述字符数量*/
+		//var str = "abbc1 abd2 ab3 ab c2";
+		//var reg = /ab[a-d]{0,3}\d/g;//按照ASC||码顺序，不能a-Z
+		//console.log(str.match(reg))
+		//var str = "<html>123<html>";
+		//var reg = /<\w+>/g;
+		//console.log(str.match(reg))
+
+		//数量具有贪婪性，默认尽可能匹配
+		//var str1 = "aaaa";
+		//var reg1 = /a+/g;
+		//console.log(str1.match(reg1));//["aaaa"]
+
+		//()多组，多组的情况下，越左边越尽量多的匹配
+		//		var s = "<html><head><title></title></head><body></body></html>";
+		//		var r = /(<.*>)(<.*>)/ //俩组
+		//		var a = s.match(r);
+		//		console.log(a[0]);//"<html><head><title></title></head><body></body></html>"  匹配的字符串
+		//		console.log(a[1]); //"<html><head><title></title></head><body></body>" 第一组子字符串，靠左，所以尽可能多的匹配
+		//		console.log(a[2]); //"</html>" 第二组子字符串
+
+		//惰性匹配，数量后加？
+		//var str1 = "aaaa";
+		//var reg1 = /a+?/g;
+		//console.log(str1.match(reg1));//["a","a","a","a"]
+
+		/*边界量词*/
+		// ^   $   多行第一个  最后一个
+		//		var s = "how are you";
+		//		var r = /\w+$/;
+		//		var a = s.match(r);  //返回数组["you"]
+		//		var r = /^\w+/;
+		//		var a = s.match(r);  //返回数组["how"]
 	</script>
+	<!--方法-->
+	<script type="text/javascript">
+		//全局与局部
+		//		var str ="aa";
+		//		var reg = /a+?/;
+		//		var reg_g = /a+?/g;
+		//		var match = str.match(reg)
+		//		var matc_g = str.match(reg_g)
+		//		console.log(match)//["a"]
+		//		console.log(matc_g)//["a","a"]
+		/*
+		 局部是只匹配到第一个就停止匹配，而全部会一直匹配直到字符串结束
+		全局匹配和局部匹配匹配规则一样，他们只是全部比局部多匹配出几个，全局匹配的第一个子字符串就是局部匹配出的字符串
+		影响方法：match/replace
+		不影响方法：test
+		 * */
+
+		//正则方法
+		//		test(str)
+
+		//字符串方法
+		//		search(reg)
+		//		replace(reg)
+		//		match(reg)
+		//		exec(reg)
+		//		split(reg)
+
+		/*
+		 当正则是全局匹配时，调用一次test或者exec，reg对象的lastInxdex会指向下一个匹配位置
+		 * */
+	</script>
+
+	<!--练习-->
+	<script type="text/javascript">
+		//手机号
+		//		var regPhone = /^1\d{10}$/;
+		//		var regPhone = /^1[13456789]\d{9}$/;
+		//		var regPhone = /^1(3|4|5|6|7|8|9)\d{9}$/;
+		//		var strPhone = "16588669955";
+		//		console.log(regPhone.test(strPhone))
+
+		//邮箱
+		//		var regMail = /^\w+\@\w+\.[A-z]+$/;//1：单词字符开头，数量>=1; 2:@; 3:不少于1的单词字符; 4: . ;5:不小于1的字母
+		//		var regMail = /^[A-z|0-9]\w{5,19}@([A-z|0-9])+\.[A-z]{2,4}$/;//1：字母开头的字符，数量6-20; 2:@; 3:字母或数字; 4: . ;5:2-4个字母
+		//		var strMail = "xhl_email@126.com";
+		//		var strMail = "1385263@qq.com";
+		//		console.log(regMail.test(strMail))
+
+		//非负2位小数
+		//		var regZX = /^(0|[1-9]\d+)\.\d{2}$/ ;//|一级运算,会把其他的自动分为俩组
+		//		var numZX = "15.12";
+		//		console.log(regZX.test(numZX))
+
+		//2位小数
+		//		var regZX = /^\-?(0|[1-9]\d+)\.\d{2}$/;
+		//		var numZX = "-0.12";
+		//		console.log(regZX.test(numZX))
+
+		//实现敏感词汇过滤
+		var blackWord = ["傻X", "caonima", "毛泽东"];
+
+		var targetStr = "你就是个傻#X，毛泽东很残酷，我caoni@ma"
+
+		var reg = creatReg(blackWord);
+		console.log(reg)
+		console.log(targetStr.replace(reg, "***"))
+		//		等于匹配
+		//		function creatReg(blackWord){
+		//			var regPattern = blackWord.join("|");
+		//			return new RegExp(regPattern,"ig");
+		//		}
+
+		//包含匹配
+/*		function creatReg(blackWord) {
+			var regPattern = "";
+			//map写法
+			//			blackWord.map((word)=>{
+			//				var wordMix = word.split("").join("[\!\@\#\*\]*")
+			//				regPattern+= wordMix+"|";
+			//			})
+			//reduce写法
+			regPattern = blackWord.reduce((pre, cur) => {
+				var wordMix = cur.split("").join("[\!\@\#\*\]*")
+				return pre + wordMix + "|";
+			}, "")
+			regPattern = regPattern.slice(0, -1);
+			return new RegExp(regPattern, "ig");
+		}*/
+		//包含匹配           骚包写法
+		function creatReg(blackWord){
+			var regPattern = blackWord.reduce((pre,cur)=>{
+				var wordMix = cur.split("").join("[\!\@\#\*\]*")
+				return pre + wordMix+"|";
+			},"").slice(0,-1)
+			return new RegExp(regPattern,"ig");
+		}
+	</script>
+
 </html>
