@@ -41,12 +41,15 @@
 <script type="text/javascript">
 	(function(){
 		//字符串构造函数生成vs字面量
-		var STR = new String("a")
+		var STR = new String("abc")
 		console.log(STR)
 		
-		var str = "a"
+		var str = "abc"
 		console.log(str)
 		console.log(typeof STR,typeof str)//object string
+		
+		console.log("substring",str.substring(0,1)) //a
+		console.log("substring",STR.substring(0,1)) //a
 
 		//数字构造函数生成vs字面量
 		var NUM = new Number(1)
