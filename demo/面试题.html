@@ -15,16 +15,76 @@
 //		    }
 //		    return -1
 //		}
-		var arr = [1,2,3,4]
-//		console.log(indexOf(arr,3))
-//		
-		var sum = arr.reduce(function (prev, cur, index, arr) {
-		    return prev + cur;
-		},0);
+//		var arr = [1,2,3,4]
+//		var sum = arr.reduce(function (prev, cur, index, arr) {
+//		    return prev + cur;
+//		},0);
+//		var max = arr.reduce(function (prev, cur, index, arr) {
+//		    return Math.max(prev,cur);
+//		},50);
 		
-		var max = arr.reduce(function (prev, cur, index, arr) {
-		    return Math.max(prev,cur);
-		},50);
-		debugger
+		
+		//题目1：封装函数 function ，使 f 的 this 指向指定的对象	
+/*		var obj ={
+			name:"obj",
+		}
+		function foo(obj,param){
+			function dosome(poroto){
+				console.log(this[poroto])
+			}
+			dosome.bind(obj)(param)
+		}
+		foo(obj,"name")*/
+		
+		//题目二：
+		/*获取 url 中的参数
+		指定参数名称，返回该参数的值 或者 空字符串
+		不指定参数名称，返回全部的参数对象 或者 {}
+		如果存在多个同名参数，则返回数组*/
+		
+		var url = "com?a=1&b=2&a=3";
+		
+		function getParams(url,paramKey){
+			if(typeof url != "string"){
+				console.error("参数错误")
+				return {}
+			}
+			var paramsStr=url.split("?")[1];
+			if(!paramsStr){return {}}
+			var paramsArr = paramsStr.split("&");
+			var paramObj = {};
+			var paramValues = [];
+			if(paramKey){//有参数
+				paramsArr.map((item)=>{
+					var itemKey = item.split("=")[0];
+					var itemValue = item.split("=")[1];
+					(itemKey === paramKey)&&paramValues.push(itemValue)
+				})	
+				if(paramValues.length===0){//没找到
+					return ""
+				}else if(paramValues.length===1){//找到一个
+					return paramValues[0]
+				}else{//找到多个
+					return paramValues
+				}
+			}else{//无参数
+				paramsArr.map((item)=>{
+					paramObj[item.split("=")[0]] =  item.split("=")[1]
+				})	
+				return paramObj
+			}
+		}
+		console.log(getParams(url))
+		
+/*		function getParams(url,paramKey){
+			if(typeof url != "string"){
+				console.error("参数错误")
+				return {}
+			}
+			var reg = /(\?.+?\&)|(\&.+?\&)/g;
+//			var reg = /(\?.+?&)|(&.?&)|(&.?[\#\/])/g;
+			var paramsArr = url.match(reg)
+			console.log(paramsArr)
+		}*/
 	</script>
 </html>
