@@ -1,0 +1,11 @@
+1:clinetWidth  /不包含border
+
+2:offsetWidth //包含border
+
+3:通过style
+getComputedStyle("ele").clinetWidth//chrome
+ele.currentStyle.width //IE
+
+注意：
+1：元素使用calc（）计算宽高后，上面三种不能获取到真实宽度
+2：使用box-sizing以后，不准确
