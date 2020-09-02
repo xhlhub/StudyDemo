@@ -19,8 +19,8 @@
 
 		// const {a,b,c} = [1,2,3]//错误
 		// const [a,b,c] = [1,2,3]//正确
-		const {name,b,c} = {name:1,age:23}//name:1
-		const {name:nameValue,b,c} = {name:1,age:23}//nameValue:1
+		// const {name,b,c} = {name:1,age:23}//name:1
+		// const {name:nameValue,b,c} = {name:1,age:23}//nameValue:1
 
 		// function doSome(...a){
 			
@@ -33,12 +33,25 @@
 		
 		
 		//用法2:合并对象/数组
-		var obj ={
-			name:"xhl",
-			height:"180cm"
-		}
-		var obj1 = {...obj,...{name:"lf",age:26},sex:"man"}
-		console.log(obj1)
+		// var obj ={
+		// 	name:"xhl",
+		// 	height:"180cm"
+		// }
+		// var obj1 = {...obj,...{name:"lf",age:26},sex:"man"}
+		// console.log(obj1)
 
+		// var arr = []
+		// function cons(...students){
+		// 	arr.push(...students)
+		// 	console.log(arr)
+		// }
+		// cons("a","b")
+		// cons("c")
+		
+		var s = new Set()
+		
+		s.add("345",'123')
+		
+		console.log(s.has("123"))
 	</script>
 </html>
