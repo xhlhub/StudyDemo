@@ -42,7 +42,7 @@
 		不指定参数名称，返回全部的参数对象 或者 {}
 		如果存在多个同名参数，则返回数组*/
 		
-		var url = "com?a=1&b=2&a=3";
+/*		var url = "com?a=1&b=2&a=3";
 		
 		function getParams(url,paramKey){
 			if(typeof url != "string"){
@@ -73,18 +73,26 @@
 				})	
 				return paramObj
 			}
-		}
-		console.log(getParams(url))
-		
-/*		function getParams(url,paramKey){
-			if(typeof url != "string"){
-				console.error("参数错误")
-				return {}
-			}
-			var reg = /(\?.+?\&)|(\&.+?\&)/g;
-//			var reg = /(\?.+?&)|(&.?&)|(&.?[\#\/])/g;
-			var paramsArr = url.match(reg)
-			console.log(paramsArr)
 		}*/
+		
+		//题目三：
+//		var tree = [{
+//			id:1,
+//			children:[{
+//				id:11,
+//			},{
+//				id:12,
+//				children:[{
+//					id:121
+//				}]
+//			}]
+//		}];
+		
+		//为 Array 对象添加一个去除重复项的方法
+		Array.prototype.removeDuplicate=function(){
+			return Array.from(new Set(this))
+		}
+		var arr = [0,1,2,2,3]
+		console.log(arr.removeDuplicate())
 	</script>
 </html>
