@@ -18,3 +18,11 @@
 useEffect什么时候执行?
 dom更新时会触发（首次进入触发&&state改变导致触发render&&props改变导致render）；对应componentDidMount、componentDidUpdate
 什么时候执行return?
+
+
+###一些hooks
+
+<!-- #### useMemo(() => computeExpensiveValue(a, b), [a, b]);
+函数是创建函数，但是a，b至少传一个，不传，比较的时候会报错 -->
+React.memo
+UseMemo 关系？

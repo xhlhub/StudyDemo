@@ -3,8 +3,25 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<style type="text/css">
+			.ellipse{
+				width: 150px;
+				height: 60px;
+				background: pink;
+				clip-path: ellipse(75px 30px at 75px 30px);
+			}
+			.circle {
+				width: 100px;
+				height: 100px;
+				background: pink;
+				/* clip-path: circle(50px at 50px); */
+				clip-path: circle(50px at 50px);
+			}
+		</style>
 	</head>
 	<body>
+		<div class="circle"></div>
+		<div class="ellipse"></div>
 	</body>
 	<script type="text/javascript">
 		// https://developer.mozilla.org/zh-CN/docs/Web/CSS/clip-path

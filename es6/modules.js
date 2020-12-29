@@ -30,7 +30,7 @@
 // export { foo1, foo2 }
 //import { foo1, foo2 }
 
-//写法三：default 不需要加 {}
+//写法三：default (1:变量无需声明 2:import不需要加 {} 3:一个文件只能有一个 export default)
 
 // export default function(){
 //     console.log(123)

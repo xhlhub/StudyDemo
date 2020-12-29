@@ -74,7 +74,7 @@
 				return paramObj
 			}
 		}
-		console.log(getParams(url))
+		// console.log(getParams(url))
 		
 /*		function getParams(url,paramKey){
 			if(typeof url != "string"){
@@ -86,5 +86,18 @@
 			var paramsArr = url.match(reg)
 			console.log(paramsArr)
 		}*/
+		
+		var url = "www.abc.com?a=1&b=2/#/?c=3ab"
+		function getUrlParam(name,str){
+			let reg = /\?|\&|\#|\//g;
+			let url = str||window.location.href;
+			let arry = url.split(reg)
+			let result =  arry.find(item=>item.includes(name+"="))||''
+			return result.split("=")[1]
+		}
+		
+		console.log(getUrlParam("b",url))
+		
+		
 	</script>
 </html>
