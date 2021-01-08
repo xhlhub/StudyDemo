@@ -5,35 +5,100 @@
 		<title></title>
 	</head>
 	<body>
-		<script type="text/javascript">
-//			var p = new Promise((resolve,reject)=>{
-//				console.log("promise end")
-//				resolve()
-//			})
-//			
-//			(async ()=>{
-//				await p
-//				console.log(1)
-//				console.log(2)
-//			})()
+<script type="text/javascript">
+var p1 = new Promise(function(resolve,reject){
+	const num = Math.random()*10 - 5
+	window.setTimeout(()=>{
+		if(num>=0){
+			resolve(num)
+		}else{
+			reject(num)
+		}
+	},100)
+})	
+//论点1	
+// function c1(){
+// 	await 1
+// }
+// c1()
 
-			async function c() {
-			    console.log('c');
-			    await new Promise(function(resolve, reject) {
-			        console.log('promise1');
-			        resolve();
-			    }).then(() => {
-			        console.log('promise1-1');
-			    });
-			    setTimeout(() => {
-			        console.log('settimeout1');
-			    });
-			    console.log('c1');
-			}
-			c().then(res=>{
-				console.log('end')
-			})
-			// c p1  p1-1  c1 end s1
-		</script>
+// async function c1(){
+// 	console.log(1)
+// }
+// c1()
+
+//论点2
+// async function c1(){
+// 	await new Promise(resolve=>{
+// 		console.log(1)
+// 		resolve()
+// 	})
+// 	console.log(2)
+// }
+// c1()//1,2
+
+// async function c1(){
+// 	await 1
+// }
+// c1()
+
+// async function c1(){
+// 	await new Promise(resolve)
+// }
+// c1()
+
+/* 
+总结： 
+1：async表示函数内有异步操作，await必须写在async里，async里可以不写await
+2：await后面跟一个promise对象或者普通值,表示await的异步操作以后再操作await后面的
+ */
+	// async function c() {
+	// 	console.log('c');
+	// 	await new Promise(function(resolve, reject) {
+	// 		console.log('promise1');
+	// 		resolve();
+	// 	}).then(() => {
+	// 		console.log('promise1-1');
+	// 	});
+	// 	setTimeout(() => {
+	// 		console.log('settimeout1');
+	// 	},0);
+	// 	console.log('c1');
+	// }
+	// c().then(res=>{
+	// 	console.log('end')
+	// })
+	//c promise1 promise1-1 c1 end settimeout1
+</script>
+<script type="text/javascript">
+	// var p1 = new Promise(function(resolve,reject){
+	// 	const num = Math.random()*10 - 5
+	// 	window.setTimeout(()=>{
+	// 		if(num>=0){
+	// 			resolve(num)
+	// 		}else{
+	// 			reject(num)
+	// 		}
+	// 	},100)
+	// })
+
+	// async function a (){
+		//写法1
+		// try{
+		// 	return await p1
+		// }catch(e){
+		// 	return Promise.reject(e)
+		// }
+		//写法2
+		// return await p1.catch(e=>{
+		// 	return Promise.reject(e)
+		// })
+	// }
+	// a().then(res=>{
+	// })
+	// .catch(e=>{
+	// })
+	
+</script>
 	</body>
 </html>

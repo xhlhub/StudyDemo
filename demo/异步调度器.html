@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+// 1，请实现如下的函数，可以批量请求数据，所有的URL地址在urls参数中，同时可以通过max参数 控制请求的并发度。当所有的请求结束后，需要执行callback回调。发请求的函数可以直接使用fetch。
+
+// function sendRequest (urls: string[], max: number, callback: () => void) {
+
+// }
+
+//javascript 实现一个带并发限制的异步调度器，保证同时最多运行2个任务
+
+
+var task1 = function(){
+	return new Promise((resolve,reject)=>{ 
+		setTimeout(()=>{
+			// if(num>0){
+			// 	console.log("task1")
+			// 	resolve(num)
+			// }else{
+			// 	reject(num)
+			// }
+			console.log("task1")
+			resolve()
+		},500)
+		})
+}
+var task2 = function(){
+	return new Promise((resolve)=>{
+		console.log("task2")
+		resolve("task2")
+	})
+}
+
+var task3 = function(){
+	return new Promise((resolve)=>{
+		setTimeout(()=>{
+			console.log("task3")
+			resolve("task3")
+		},200)
+	})
+}
+var task4 = function(){
+	return new Promise((resolve)=>{
+		setTimeout(()=>{
+			console.log("task4")
+			resolve("task4")
+		},100)
+	})
+}
+var task5 = function(){
+	return new Promise((resolve)=>{
+		setTimeout(()=>{
+			console.log("task5")
+			resolve("task5")
+		},600)
+	})
+}
+
+function schedule(tasks,max=2){
+	//分解
+	// let p1 =  tasks[0]()
+	// let p2 =  tasks[1]()
+	// let index = 1
+	// bind(p1)
+	// bind(p2)
+	//循环
+	let pArr = [];
+	let index = 0
+	for(var i = 0;i<max;i++){
+		pArr[i] =  tasks[i]()
+		bind(pArr[i])
+		index=i;//tasks执行的当前指针
+	}
+	function bind(p){
+		p.then(res=>{
+			index++;
+			if(index<tasks.length){
+				p = tasks[index]()
+				bind(p)
+			}
+		})
+	}
+}
+
+schedule([task1,task2,task3,task4,task5],3)
+</script>
+</html>
