@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+var apple = {
+	name:"apple",
+}		
+var _apple = new Proxy(apple,{
+	get:function(target,propKey,receiver){
+		console.log("get")
+		return Reflect.get(target, propKey, receiver);
+	},
+	set:function(target,propKey,value,receiver){
+		console.log("set")
+		return Reflect.get(target, propKey, value,receiver);
+	}
+})
+console.log(_apple.name)
+apple.age = 12
+console.log(_apple.age)
+	</script>
+</html>
