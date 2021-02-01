@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html{
+				font-size: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<p>这是一长串内容啊啊<span class="variety" contenteditable="true">哦哦哦哦</span>啊啊啊啊啊啊啊</p>
+	</body>
+	<script type="text/javascript">
+		function insert() {
+			try{
+				var sel = window.getSelection()||window.document.selection; //
+				var range = sel.getRangeAt(0)||sel.createRange(); //
+				if (range.startContainer) { // DOM模型 
+					sel.removeAllRanges(); // 删除Selection中的所有Range  
+					range.deleteContents(); // 清除Range中的内容  
+					// 获得Range中的第一个html结点  
+					var container = range.startContainer;
+					// 获得Range起点的位移  
+					var pos = range.startOffset;
+					// 插入内容  
+					var newStrong = window.document.createElement("strong");
+					newStrong.innerText=" "//设一个空格字符，不然选不中
+					if (container.nodeType == 3) { // 如是一个TextNode  
+						var result=range.insertNode(newStrong);
+						// 改变光标位置  
+						range = document.createRange();
+						range.selectNodeContents(newStrong)
+					} else { // 如果是一个HTML Node  
+					}
+					sel.addRange(range);
+					return true
+				}				
+			}catch{
+				
+			}
+		}
+		var ele = document.getElementsByClassName("variety")[0]
+		ele.addEventListener("click",function(e){
+			if(e.target.className === "variety"){
+				insert()
+			}
+		})
+		ele.onkeyup=function(e){
+			try{
+				var sel = window.getSelection()||window.document.selection;
+				var range = sel.getRangeAt(0)||sel.createRange();
+				if (range.startContainer) { 
+					var container = range.startContainer;
+					if(container.parentNode.className === 'variety'&& !(e.keyCode === 8 || e.code ==='Backspace')){
+						insert()
+					}
+				}				
+			}catch{
+				
+			}
+		}
+	</script>
+</html>
