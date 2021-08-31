@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body></body>
+<script>
+  // 构造函数
+  function Scheduler () {
+    //单例实现方法,这里用Scheduler.prototype.instance也可以实现
+    if (Scheduler.instance) {
+      return Scheduler.instance
+    }
+    Scheduler.instance = this
+
+    //构造函数代码
+    this.length = 1
+    this.add = function () {
+      this.length++
+    }
+  }
+  const schedule1 = new Scheduler()
+  const schedule2 = new Scheduler()
+  const schedule3 = Scheduler()
+  console.log(schedule1 === schedule2) // true
+  console.log(schedule1 === schedule3) // true
+
+</script>
+
+<script>
+  // class
+  class Scheduler {
+    static instance = null
+
+    constructor () {
+      // 单例代码
+      if (Scheduler.instance) {
+        return Scheduler.instance
+      }
+      Scheduler.instance = this
+      
+      // 实例属性
+      this.length = 1
+    }
+    
+    add() {
+      this.length++
+      console.log(this.length)
+    }
+  }
+
+  const schedule1 = new Scheduler()
+  const schedule2 = new Scheduler()
+  console.log(schedule1 === schedule2) // true
+</script>
+
+<script>
+  // 实现方法：
+  // 在构造函数constructor里，判断该构造函数有实例，就返回
+  // 判断方法：实例赋值到构造函数静态变量/原型对象
+
+  // 其他思路：https://segmentfault.com/a/1190000012842251
+  // 将构造函数和单例方法分开
+  // 闭包
+  
+  // 单例构造函数
+  function CreateSingleton (name) {
+      this.name = name;
+      this.getName();
+  };
+
+  // 获取实例的名字
+  CreateSingleton.prototype.getName = function() {
+      console.log(this.name)
+  };
+  // 单例对象
+  var Singleton = (function(){
+      var instance;
+      return function (name) {
+          if(!instance) {
+              instance = new CreateSingleton(name);
+          }
+          return instance;
+      }
+  })();
+
+  // 创建实例对象1
+  var a = new Singleton('a');
+  // 创建实例对象2
+  var b = new Singleton('b');
+
+  console.log(a===b);
+</script>
+</html>
