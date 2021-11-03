@@ -16,17 +16,20 @@
 
 		/*描述字符*/
 
-		//		var str = `I am a    chinese
-		//		she is a girl`
+				var str = `I am a    chinese
+				she is a girl`
 		//		var reg = /\n/g;
-		//		var reg1 = /\s/g;
+				var reg1 = /\s/g;
 		//		str = str.replace(reg,"*")
 		//		console.log(str)
-		//		str = str.replace(reg1,"")
-		//		console.log(str)
+				str = str.replace(reg1,"")
+				console.log(str)
 		//		str = str.replace(/\*/g,"\n")
 		//		console.log(str)
-
+				
+				var teststr = "abac"
+				console.log(teststr.replace("a",""))
+			
 		/*
 		.	查找单个字符，除了换行和行结束符
 		\w	查找单词字符,字母/数字/下划线
@@ -163,13 +166,13 @@
 		//		console.log(regZX.test(numZX))
 
 		//实现敏感词汇过滤
-		var blackWord = ["傻X", "caonima", "毛泽东"];
+		// var blackWord = ["傻X", "caonima", "毛泽东"];
 
-		var targetStr = "你就是个傻#X，毛泽东很残酷，我caoni@ma"
+		// var targetStr = "你就是个傻#X，毛泽东很残酷，我caoni@ma"
 
-		var reg = creatReg(blackWord);
-		console.log(reg)
-		console.log(targetStr.replace(reg, "***"))
+		// var reg = creatReg(blackWord);
+		// console.log(reg)
+		// console.log(targetStr.replace(reg, "***"))
 		//		等于匹配
 		//		function creatReg(blackWord){
 		//			var regPattern = blackWord.join("|");
@@ -193,13 +196,64 @@
 			return new RegExp(regPattern, "ig");
 		}*/
 		//包含匹配           骚包写法
-		function creatReg(blackWord){
-			var regPattern = blackWord.reduce((pre,cur)=>{
-				var wordMix = cur.split("").join("[\!\@\#\*\]*")
-				return pre + wordMix+"|";
-			},"").slice(0,-1)
-			return new RegExp(regPattern,"ig");
-		}
+		// function creatReg(blackWord){
+		// 	var regPattern = blackWord.reduce((pre,cur)=>{
+		// 		var wordMix = cur.split("").join("[\!\@\#\*\]*")
+		// 		return pre + wordMix+"|";
+		// 	},"").slice(0,-1)
+		// 	return new RegExp(regPattern,"ig");
+		// }
 	</script>
-
+<script type="text/javascript">
+// 注释：/* */
+// 秒变：?_1_ _?
+// var strP = `正文开始?_1_这是秒变1句子_?/*这是注释*/这是正文。?_2_这是秒变2。_?/*这是注释*/结束啦`;
+// const var_begin = /\?\_\d+\_/;// ?_1_
+// const var_end = /\_\?/;// _?
+// const re_begin = /\/\*/;// /*
+// const re_end = /\*\//;// */
+// const tagReg = /\?\_\d+\_|\_\?|\/\*|\*\//g;
+// let tagArr = strP.match(tagReg)
+// let textArr = strP.split(tagReg)
+// const result= [];
+// textArr.map((text,index)=>{
+// 	if(text === ''){return}
+// 	if(index===0){
+// 		result.push({
+// 			type: 'DEFAULT',
+// 			text: text,
+// 		})
+// 	}
+// 	const tag = tagArr[index-1]
+// 	if(var_begin.test(tag)){
+// 		result.push({
+// 			type: 'VARIETY',
+// 			text: text,
+// 			index: tag.slice(2,-1),
+// 		})
+// 	}
+// 	if(re_begin.test(tag)){
+// 		result.push({
+// 			type: 'REMARK',
+// 			text: text,
+// 		})
+// 	}
+// 	if(var_end.test(tag)||re_end.test(tag)){
+// 		result.push({
+// 			type: 'DEFAULT',
+// 			text: text,
+// 		})
+// 	}		
+// })
+// console.log(tagArr)
+// console.log(textArr)
+// console.log(result)
+</script>
+<script type="text/javascript">
+	//去掉p标签
+	var p = `<p>这是一段p文字</p><p class="abc">这也是一段p文字</p><span>这也是一段span</span>`
+	var reg3 = /(<123\/?.*?>)/gi;
+	console.log(p.split(reg3,''))
+	console.log(null === null)
+</script>
 </html>
