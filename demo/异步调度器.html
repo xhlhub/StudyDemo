@@ -1,93 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
 </body>
-<script type="text/javascript">
-// 1，请实现如下的函数，可以批量请求数据，所有的URL地址在urls参数中，同时可以通过max参数 控制请求的并发度。当所有的请求结束后，需要执行callback回调。发请求的函数可以直接使用fetch。
 
-// function sendRequest (urls: string[], max: number, callback: () => void) {
+<script>
+  function Scheduler () {
+    if (Scheduler.instance) {
+      return Scheduler.instance
+    }
+    Scheduler.instance = this
 
-// }
+    this.length = 0
+    this.progressNumber = 2
+    this.allTasksMap = {}
+    this.penddingTasks = []
+    this.progressTasks = []
+    this.fulfillTasks = []
 
-//javascript 实现一个带并发限制的异步调度器，保证同时最多运行2个任务
+    this.add = function (originTask) {
+      if (Array.isArray(originTask)) {
+        originTask.forEach(item=>{
+          this.addTask(item)
+        })
+      } else {
+        this.addTask(originTask)
+      }
+    }
 
+    this.addTask = function (originTask) {
+      const task = this.certificatTask(originTask)
+      const { id } = task
+      this.allTasksMap[id] = task
+      if (this.progressTasks.length < this.progressNumber) {
+        this.pushProgressTasks(task)
+      } else {
+        this.penddingTasks.push(task)
+      }
+    }
 
-var task1 = function(){
-	return new Promise((resolve,reject)=>{ 
-		setTimeout(()=>{
-			// if(num>0){
-			// 	console.log("task1")
-			// 	resolve(num)
-			// }else{
-			// 	reject(num)
-			// }
-			console.log("task1")
-			resolve()
-		},500)
-		})
-}
-var task2 = function(){
-	return new Promise((resolve)=>{
-		console.log("task2")
-		resolve("task2")
-	})
-}
+    this.certificatTask = function (originTask) {
+      this.length++
+      return {
+        ...originTask,
+        id: this.length,
+      }
+    }
 
-var task3 = function(){
-	return new Promise((resolve)=>{
-		setTimeout(()=>{
-			console.log("task3")
-			resolve("task3")
-		},200)
-	})
-}
-var task4 = function(){
-	return new Promise((resolve)=>{
-		setTimeout(()=>{
-			console.log("task4")
-			resolve("task4")
-		},100)
-	})
-}
-var task5 = function(){
-	return new Promise((resolve)=>{
-		setTimeout(()=>{
-			console.log("task5")
-			resolve("task5")
-		},600)
-	})
-}
+    this.pushProgressTasks = function (task) {
+      this.progressTasks.push(task)
+      this.runTask(task)
+    }
 
-function schedule(tasks,max=2){
-	//分解
-	// let p1 =  tasks[0]()
-	// let p2 =  tasks[1]()
-	// let index = 1
-	// bind(p1)
-	// bind(p2)
-	//循环
-	let pArr = [];
-	let index = 0
-	for(var i = 0;i<max;i++){
-		pArr[i] =  tasks[i]()
-		bind(pArr[i])
-		index=i;//tasks执行的当前指针
-	}
-	function bind(p){
-		p.then(res=>{
-			index++;
-			if(index<tasks.length){
-				p = tasks[index]()
-				bind(p)
-			}
-		})
-	}
-}
+    this.runTask = (task) => {
+      const { id, run, cb } = task
+      const p = run()
+      Promise.resolve(p).then(res=>{
+        cb && typeof cb === 'function' && cb(res)
+        // 移除任务
+        this.updateTask(task)
+      }).catch(res=>{
+        cb && typeof cb === 'function' && cb(res)
+        // 移除任务
+        this.updateTask(task)
+      })
+    }
 
-schedule([task1,task2,task3,task4,task5],3)
+    this.updateTask = (fulfillTask) => {
+      const {penddingTasks, progressTasks } = this
+      const index = progressTasks.findIndex((item)=>{ item.id === fulfillTask.id })
+      progressTasks.splice(index,1)
+      // 插入新任务
+      if (penddingTasks.length) {
+        const peddingTask = penddingTasks[0]
+        this.pushProgressTasks(peddingTask)
+        penddingTasks.shift()
+      }
+    }
+
+  }
+</script>
+
+<script>
+  function taskGenerrater (time = 1, ex, cb) {
+    return {
+      run:() => (
+        new Promise((resolve, reject) => {
+          window.setTimeout(() => {
+              resolve(ex)
+          }, time * 100)
+        })
+      ),
+      cb,
+    }
+  }
+
+  function run (task) {
+    const { id, run, cb } = task
+    const p = run()
+    Promise.resolve(p).then(res=>{
+      cb && typeof cb === 'function' && cb(res)
+    }).catch(res=>{
+      cb && typeof cb === 'function' && cb(res)
+    })
+  }
+
+  const task1 = taskGenerrater(5, 'task1', res=>{
+    console.log(res)
+  })
+  const task2 = taskGenerrater(2, 'task2', res=>{
+    console.log(res)
+  })
+  const task3 = taskGenerrater(4, 'task3', res=>{
+    console.log(res)
+    console.timeEnd()
+  })
+
+  const schedule = new Scheduler()
+  
+  schedule.add([task1,task2,task3])
+  console.time()
+
 </script>
 </html>
