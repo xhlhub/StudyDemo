@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var personModel = {
+        //     type: 'person',
+        //     name: 'model',
+        //     sayName: function(){
+        //         return this.name
+        //     }
+        // }
+
+        // var person1 = Object.create(personModel)
+        // var person2 = Object.create(personModel, {
+        //     name: {
+        //         value: 'person2'
+        //     }
+        // })
+        // console.log(person1.sayName())
+        // console.log(person2.sayName())
+        class Person {
+            constructor (name) {
+                this.name = name
+            }
+            sayName() {
+                console.log(this.name)
+            }
+        }
+
+        Person.prototype.type = 'person'
+
+        class Man extends Person {
+            constructor(props){
+                super(props)
+                this.sex = 'man'
+            }
+            saySex() {
+                console.log(this.sex)
+            }
+        }
+
+        const xiaowang = new Person('xiaowang')
+        const xiaohei = new Man('xiaohei')
+        debugger
+    </script>
+</body>
+</html>

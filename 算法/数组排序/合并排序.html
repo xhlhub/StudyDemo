@@ -17,7 +17,7 @@
 			let result = [];
 			let il=0,ir=0;
 //			j=0;
-			while(il<left.length||ir<right.length){
+			while(il<left.length && ir<right.length){
 //				j++;
 				if(left[il]<right[ir]){
 					result.push(left[il]);
@@ -26,6 +26,12 @@
 					result.push(right[ir]);
 					ir++
 				}
+			}
+			if (il === left.length) {
+				result.push(...right.slice(ir))
+			}
+			if (ir === right.length) {
+				result.push(...left.slice(il))
 			}
 //			console.log(j)
 			return result

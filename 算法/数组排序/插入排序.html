@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function insertSort(array){
+            for (let i = 1; i < array.length; i++) {
+                var m = i
+                for (let j = i - 1; index >= 0; j--) {
+                    if (array[j] > array[m]) {
+                        array[j + 1] = array[j]
+                    } else {
+                        break
+                    }
+                }
+                array[j + 1] = array[m]
+            }
+            return array
+        }
+        var arr = [12,4,3,1,6,5]
+        console.log(insertSort(arr))
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Link(){
+            this.head = new Node('head')
+            this.size = 0
+            this.currentNode = null
+        }
+
+        Link.prototype = {
+            find: function(item) {
+                let currNode = this.head;
+
+                while (currNode && (currNode.data !== item)) {
+                    currNode = currNode.next;
+                }
+
+                return currNode;
+            },
+            insert: function(item, element){
+                let itemNode = this.find(item);
+
+                if(!itemNode) {  // 如果item元素不存在
+                    return;
+                }
+
+                let newNode = new Node(element);
+
+                newNode.next = itemNode.next; // 若currNode为最后一个节点，则currNode.next为空
+                itemNode.next = newNode;
+            
+                this.size++;
+            },
+            remove: function(item){
+                if (!this.find(item)) {
+                    return '不存在该节点'
+                }
+                var currentNode = this.head
+                while (currentNode.next.data !== item) {
+                    currentNode = currentNode.next
+                }
+
+                currentNode.next = currentNode.next.next
+                this.size--
+            }
+        }
+
+        function Node(data){
+            this.data = data
+            this.prev = null
+            this.next = null
+        }
+    </script>
+</body>
+</html>

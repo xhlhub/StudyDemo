@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // https://blog.csdn.net/sinat_28979467/article/details/90324050
+        class BrinayTree {
+            constructor () {
+                this.root = null
+            }
+            insertNode(node,newNode) {
+                if (newNode.val < node.val) {
+                    if (node.left === null) {
+                        node.left = newNode
+                    } else {
+                        this.insertNode(node.left, newNode)
+                    }
+                } else {
+                    if (node.right === null) {
+                        node.right = newNode
+                    } else {
+                        this.insertNode(node.right, newNode)
+                    }
+                }
+            }
+
+            insert(val) {
+                var node = new Node(val)
+                if (this.root === null) {
+                    this.root = node
+                } else {
+                    this.insertNode(this.root, node)
+                }
+            }
+
+            // 前序遍历
+            DLR() {
+                traverseDLR(this.root, function(node) {
+                    console.log(node.val)
+                })
+            }
+
+            // 前序遍历
+            LDR() {
+                traverseLDR(this.root, function(node) {
+                    console.log(node.val)
+                })
+            }
+
+            traverseLDR
+
+            // 层序遍历
+            levelTraverse() {
+
+            }
+
+        }
+
+        class Node {
+            constructor(val) {
+                this.val = val
+                this.left = null
+                this.right = null
+            }
+        }
+
+        // 前序 中-左-右
+        function traverseDLR(node, cb) {
+            cb(node)
+            node.left && traverseDLR(node.left, cb)
+            node.right && traverseDLR(node.right, cb)
+        }
+
+        // 中序 左-中-右
+        function traverseLDR(node, cb) {
+            node.left && traverseLDR(node.left, cb)
+            cb(node)
+            node.right && traverseLDR(node.right, cb)
+        }
+
+        // 后序 左-右-中
+
+        // 层序遍历
+        function levelTraverse(tree) {
+            var result = [],
+               queue = [];
+            
+            if (!tree.root) {
+                return null
+            }
+
+            queue = [tree.root]
+
+            while (queue.length) {
+                var level = []
+                var len = queue.length
+                for (let index = 0; index < len; index++) {
+                    var currentNode = queue.shift()
+                    level.push(currentNode.val)
+                    if (currentNode.left) {
+                        queue.push(currentNode.left)
+                    }
+                    if (currentNode.right) {
+                        queue.push(currentNode.right)
+                    }
+                }
+                result.push(level)
+            }
+            
+            return result
+        }
+
+        var tree = new BrinayTree()
+        const arr = [10,5,15,3,6,12,18,9]
+        arr.forEach((i) => {
+            tree.insert(i)
+        })
+        console.log(tree)
+        tree.DLR()
+        console.log('>>>')
+        tree.LDR()
+        console.log(levelTraverse(tree))
+
+    </script>
+</body>
+</html>

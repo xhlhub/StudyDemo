@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            选择最小的交换到数组前面
+            1:小循环j，遍历找到最小指针m
+            2:将m元素和数组i元素交换（第一次i为0，第二次遍历i为1,...）
+            3:大循环继续执行
+        */
+       
+
+        function selectSort(array){
+            for (let i = 0; i < array.length; i++) {
+                var m = i
+                for (let j = i; j < array.length; j++) {
+                    if (array[j] < array[m]) {
+                        m = j
+                    }
+                }
+                var tmp = array[m]
+                array[m] = array[i]
+                array[i] = tmp
+            }
+            return array
+        }
+
+        var arr = [12,4,3,1,6,5]
+        console.log(selectSort(arr))
+
+        /*
+            第1次: [1,4,3,12,6,5] 12和1交换
+            第2次: [1,3,4,12,6,5] 4和3交换
+            第3次: [1,3,4,5,6,12]
+            第n次: []
+       */  
+    </script>
+</body>
+</html>
