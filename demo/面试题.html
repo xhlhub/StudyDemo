@@ -25,16 +25,19 @@
 		
 		
 		//题目1：封装函数 function ，使 f 的 this 指向指定的对象	
-/*		var obj ={
+		var obj ={
 			name:"obj",
 		}
-		function foo(obj,param){
-			function dosome(poroto){
+
+		function dosome(poroto){
 				console.log(this[poroto])
-			}
+		}
+
+		function bindFn(fn, obj, param){
 			dosome.bind(obj)(param)
 		}
-		foo(obj,"name")*/
+
+		bindFn(dosome, obj, "name")
 		
 		//题目二：
 		/*获取 url 中的参数

@@ -11,6 +11,7 @@
         <input name="login"/>
         <input type="text">
     </div>
+    <div></div>
 <script>
 // querySelector
 //1:参数是CSS选择器
@@ -19,7 +20,10 @@ var input = document.querySelector("div.container input[name='login']")
 
 // querySelectorAll
 // 1:匹配所有，返回数组
-
+var oDiv = document.getElementsByTagName('input')[0]
+console.log(Object.getPrototypeOf(oDiv))
+var input = document.querySelectorAll("div.container input")
+debugger
 </script>    
 </body>
 </html>

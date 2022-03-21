@@ -24,30 +24,54 @@
         // })
         // console.log(person1.sayName())
         // console.log(person2.sayName())
-        class Person {
-            constructor (name) {
-                this.name = name
+        // class Person {
+        //     constructor (name) {
+        //         this.name = name
+        //     }
+        //     sayName() {
+        //         console.log(this.name)
+        //     }
+        // }
+
+        // Person.prototype.type = 'person'
+
+        // class Man extends Person {
+        //     constructor(props){
+        //         super(props)
+        //         this.sex = 'man'
+        //     }
+        //     saySex() {
+        //         console.log(this.sex)
+        //     }
+        // }
+
+        // const xiaowang = new Person('xiaowang')
+        // const xiaohei = new Man('xiaohei')
+
+        class Animal {
+
+            constructor (sex, age) {
+                this.sex = sex; // 构造函数继承
+                this.age = age;
             }
-            sayName() {
-                console.log(this.name)
+            makeLove () {
+                if (age > 10) {
+                    console.log('i can make love...')
+                } else {
+                    console.log('i cant make love...')
+                }
             }
+            get fertilit () { // 原型继承
+                return this.sex === 'female'
+            }
+
         }
+        Animal.prototype.type = 'animal' // 原型继承
 
-        Person.prototype.type = 'person'
+        var mao1 = new Animal('female', 5)
+        console.log(mao1)
 
-        class Man extends Person {
-            constructor(props){
-                super(props)
-                this.sex = 'man'
-            }
-            saySex() {
-                console.log(this.sex)
-            }
-        }
-
-        const xiaowang = new Person('xiaowang')
-        const xiaohei = new Man('xiaohei')
-        debugger
+        
     </script>
 </body>
 </html>

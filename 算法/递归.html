@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var arr = [1,1,2,3,5,8]
+        // var i = 1
+        // function recursive (n){
+        //     console.log(i++)
+        //     if (n === 0 || n === 1) {
+        //         return 1
+        //     }
+        //     return recursive(n - 1) + recursive(n - 2)
+        // }
+        // console.log(recursive(6))
+
+        // function a (){
+        //     debugger
+        //     return 1
+        // }
+        // function b (){
+        //     debugger
+        //     a()
+        //     debugger
+        // }
+
+        // function c (){
+        //     debugger
+        //     b()
+        //     debugger
+        // }
+        // c()
+        
+        var array = [1,2,3,4]
+
+        // function reverse (sum, i) {
+        //     if (i < array.length) {
+        //         sum = sum + array[i]
+        //         return reverse(sum, ++i)
+        //     } else {
+        //         return sum
+        //     }
+        // }
+        // console.log(reverse(0, 0)) // 10
+
+        // function reverse (i) {
+        //     if (i > 0) {
+        //         return array[i] + reverse(--i)
+        //     } else {
+        //         return array[0]
+        //     }
+        // }
+        // console.log(reverse(array.length - 1))
+
+        // 找出符合条件city
+        var citesData = [{
+            id:1,
+            name:'山西',
+            children:[{
+                id:11,
+                name: '大同',
+                children:[{
+                    id:111,
+                    name:'阳高',
+                    children:null
+                },{
+                    id:112,
+                    name:'浑源',
+                    children:null
+                }]
+            }],
+        },{
+            id:2,
+            name:'河南',
+            children:[{
+                id:21,
+                name: '郑州',
+                children:[{
+                    id:211,
+                    name:'高新区',
+                    children:[{
+                        id: 2111,
+                        name:'隆花园小区',
+                        children:null
+                    }]
+                }]
+            },{
+                id:22,
+                name:'开封',
+                children:null
+            }
+        ],
+        }
+    ];
+
+    
+    let testTime = 0
+    function findCityParents (cites, targetCityId) {
+        function rever (array, parents) {
+            for (let index = 0; index < array.length; index++) {
+                testTime++; // 测试代码
+                const city = array[index];
+                const { id, name, children } = city
+                const newParents = [...parents, name] // 每次重新定义parents，防止不同循环体互相影响
+                if (id === targetCityId) {
+                    return newParents
+                } else if (children) {
+                    var find = rever(children,newParents)
+                    if (find) { // 直接return，第一次循环体结束后（第一次走到叶子结点），不管是否找到结果，就会return出来，后面的不执行了
+                        return find // 找到就return，结束后序循环体。
+                    }
+                }
+            }
+        }
+        console.log(testTime) // 测试代码
+        return rever(cites, [])
+    }
+    console.log(findCityParents(citesData, 211))
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input id='one' type="text">
+    </div>
+    
+    <script>
+        console.log(fun) // Uncaught ReferenceError
+    
+        console.log(person) // Uncaught ReferenceError
+    </script>
+    
+    <script>
+        console.log(person) // undefind
+    
+        console.log(fun) // function(){}
+
+        console.log(fun1) // undefind
+    
+        var person = "Eric";
+    
+        console.log(person) // Eric
+    
+        function fun() {
+            console.log(person) 
+            var person = "Tom";
+            console.log(person)
+        }
+
+        var fun1 = function() {}
+    
+        fun() // undefind tom 
+    
+        console.log(person) // eric
+    </script>
+</body>
+</html>

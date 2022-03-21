@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input id='one' type="text">
+    </div>
+    
+    <script>
+        
+        // doubance
+        var box = document.getElementById('box')
+        var one = document.getElementById('one')
+        function dosome (e) {
+            console.log(e)
+            console.log(this)
+        }
+        // 防抖 （最后一次才触发函数）
+        function debounce (fn, wait) {
+            let timer
+
+            return function () { // 父function
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    // 1:箭头函数没有arguments,所以这里的arguments指父function的arguments
+                    // 2:箭头函数没有this，这里的this即父级function的this
+                    fn.apply(this, arguments)
+                }, wait)
+            }
+            // 等同于
+            // return function (...args) {
+            //     if (timer) {
+            //         clearTimeout(timer)
+            //     }
+            //     timer = setTimeout(() => {
+            //         fn.apply(this, args) // arguments只在普通函数里有!
+            //     }, wait)
+            // }
+            // // 等同于
+            // return function () {
+            //     let args = arguments;
+            //     let context = this;
+            //     if (timer) {
+            //         clearTimeout(timer)
+            //     }
+            //     timer = setTimeout(function(){
+            //         fn.apply(context, args) // arguments只在普通函数里有!
+            //     }, wait)
+            // }
+        }
+
+        // 立即执行版：先执行一次
+        function debounceB (fn, wait, immediate) {
+            let timer
+            let firstExe = false
+
+            return function () { // 父function
+                if (immediate && !firstExe) {
+                    fn.apply(this, arguments)
+                    firstExe = true
+                }
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    fn.apply(this, arguments)
+                }, wait)
+            }
+        }
+        one.onkeyup= debounceB(dosome, 1000, true)
+        
+        // 节流 （定期触发函数）
+        // time版本:每个周期开始先触发
+        // function throttle (fn, wait = 1000) {
+        //     let preTime = 0;
+        //     return function (){
+        //         const now = Date.now()
+        //         if (now - preTime > wait) {
+        //             fn.apply(this, arguments)
+        //             preTime = now
+        //         }
+        //     }
+        // }
+        // 定时器版本：每个周期结束触发
+        function throttle (fn, wait = 1000) {
+            let timer;
+            return function (){
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(this, arguments)
+                        clearTimeout(timer)
+                        timer = null
+                    }, wait)
+                }
+            }
+        }
+
+        document.onmousemove = throttle(dosome,1000)
+        
+    </script>
+</body>
+</html>

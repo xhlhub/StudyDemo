@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            padding: 20px;
+            background: pink;
+            width: 200px;
+            text-align: center;
+        }
+
+        .inner{
+            padding: 20px;
+            background: #fff;
+        }
+        
+        span{
+            padding: 8px;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="inner" >
+            <span>内容区</span>
+        </div>
+    </div>
+</body>
+<script>
+    var container = document.getElementsByClassName('container')[0]
+    var inner = document.querySelector('.inner')
+    var span = document.getElementsByTagName('span')[0]
+
+    // container.addEventListener('click', function(e){
+    //     debugger
+    // })
+    // span.addEventListener('click', function(e){
+    //     debugger
+    // })
+    // container.addEventListener('click', function(e){
+    //     debugger
+    // },true)
+    // span.addEventListener('click', function(e){
+    //     debugger
+    // },true)
+
+    function clickinner () {
+        console.log('inner clicked')
+        console.log(this)
+    }
+
+    const handler = function() {
+        console.log(this)
+    }
+    span.addEventListener('click', function(){
+        // console.log(this)
+        // handler()
+        handler.call(this)
+    },true)
+    var val = 0;
+var obj = {
+        val:1,
+        fun: function  () {
+            this.val = 2;
+            setTimeout(function() {
+                console.log(this.val)
+            },500)
+        },
+        arrowFun: function  () {
+            this.val = 3;
+            setTimeout(() => {
+                console.log(this.val)
+            },500)
+        }
+    }
+    
+    obj.fun() //  0
+    obj.arrowFun() //  3
+    obj.arrowFun.call({val:5}) //  3
+</script>
+</html>
