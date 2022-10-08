@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.box{
+				height: 80px;
+				border: 1px solid #eee;
+				text-align: center;
+				
+				/* animation-name: loading;
+				animation-duration: 2s;
+				animation-delay: 0s;
+				animation-timing-function: linear;
+				animation-direction: alternate;
+				animation-iteration-count: infinite; */
+				
+			}
+			@keyframes loading {
+				0% {
+					width: 10px;
+				}
+				100% {
+					width: 600px;
+				}
+			}
+			.inner {
+				height: 60px;
+				width: 20%;
+				display:inline-block;
+				background-image: linear-gradient(to right, red 50%, green 49%);
+				/* background-image: url("./images/moon.jpeg"); */
+				background-size: 200% 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="inner"></div>
+		</div>
+	</body>
+</html>

@@ -10,6 +10,37 @@
 
 		<svg></svg>
 	</body>
+	<script>
+		// var reg = new RegExp("(?<=.*\..*)\.", 'g');
+		// var strrrrrr= "123.2.2".replace(reg, "")
+		// var aaaaaa = "22.22..".replace(/(?<=\..*)\./g, '')
+		// var aaaaaa1 = "22.22..".replace(/(?:.*\..*)\./g, '')
+		// var a = "abc".matchAll(/(a)(b)/g)
+		
+		// var reggggg = /(?<=\+.*)\+/g
+		// var reggggg = /(?:\+.*)\+/g
+		// var aa = "123+345+".match()
+		// var strrr = "..0.10.0.2."
+		// var index = strrr.indexOf(".") + 1
+		// var pre = strrr.substring(0,index)
+		// var after = strrr.substring(index)
+		
+		// var result = pre + after.replaceAll(".", "")
+		// console.log(result)
+		const toPositiveNumber = (str) => {
+		  if (typeof str === 'number') {
+		    return Math.abs(str);
+		  }
+		  // 去除字符串多余的小数点
+		  const i = str.indexOf('.') + 1;
+		  const result = str.substring(0, i) + str.substring(i).replace(/\./g, '');
+		
+		  return Math.abs(Number(result));
+		};
+		
+		console.log(toPositiveNumber("-123.1awdaw..3"))
+
+	</script>
 	<!--正则语法-->
 	<script type="text/javascript">
 		//原文:http://c.biancheng.net/view/5632.html		

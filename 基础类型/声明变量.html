@@ -7,8 +7,15 @@
 	<body>
 	</body>
 	<script type="text/javascript">
-		var a = 10;
-function a(){}
-console.log(typeof a)//number
+		// var a = 10;
+		// function a(){}
+		// console.log(typeof a)//number
+
+		const obj = {
+			arr:[1,2]
+		}
+		const { arr = [1] } = obj;
+		arr.push(3)
+		debugger
 	</script>
 </html>
