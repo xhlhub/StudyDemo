@@ -56,25 +56,27 @@
             // }
         }
 
-        // 立即执行版：先执行一次
-        function debounceB (fn, wait, immediate) {
-            let timer
-            let firstExe = false
+        // document.onkeyup = debounce(dosome, 300)
 
-            return function () { // 父function
-                if (immediate && !firstExe) {
-                    fn.apply(this, arguments)
-                    firstExe = true
-                }
-                if (timer) {
-                    clearTimeout(timer)
-                }
-                timer = setTimeout(() => {
-                    fn.apply(this, arguments)
-                }, wait)
-            }
-        }
-        one.onkeyup= debounceB(dosome, 1000, true)
+        // 立即执行版：先执行一次
+        // function debounceB (fn, wait, immediate) {
+        //     let timer
+        //     let firstExe = false
+
+        //     return function () { // 父function
+        //         if (immediate && !firstExe) {
+        //             fn.apply(this, arguments)
+        //             firstExe = true
+        //         }
+        //         if (timer) {
+        //             clearTimeout(timer)
+        //         }
+        //         timer = setTimeout(() => {
+        //             fn.apply(this, arguments)
+        //         }, wait)
+        //     }
+        // }
+        // one.onkeyup= debounceB(dosome, 1000, true)
         
         // 节流 （定期触发函数）
         // time版本:每个周期开始先触发
@@ -89,20 +91,20 @@
         //     }
         // }
         // 定时器版本：每个周期结束触发
-        function throttle (fn, wait = 1000) {
-            let timer;
-            return function (){
-                if (!timer) {
-                    timer = setTimeout(() => {
-                        fn.apply(this, arguments)
-                        clearTimeout(timer)
-                        timer = null
-                    }, wait)
-                }
-            }
-        }
+        // function throttle (fn, wait = 1000) {
+        //     let timer;
+        //     return function (){
+        //         if (!timer) {
+        //             timer = setTimeout(() => {
+        //                 fn.apply(this, arguments)
+        //                 clearTimeout(timer)
+        //                 timer = null
+        //             }, wait)
+        //         }
+        //     }
+        // }
 
-        document.onmousemove = throttle(dosome,1000)
+        // document.onmousemove = throttleEnd(dosome,1000)
         
     </script>
 </body>
