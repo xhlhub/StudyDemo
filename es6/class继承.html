@@ -6,26 +6,39 @@
 	</head>
 	<body>
 <script type="text/javascript">
-function Animal(){
-	this.move = function(){
-		alert('我可以动1')
+window.log = console.log
+
+// 寄生组合式继承
+
+function Animal (sex) {
+	this.sex = sex
+}
+
+Object.assign(Animal.prototype, {
+	type: 'animal',
+	move: () => {
+		log("i can move")
 	}
-}	
-Object.assign(Animal.prototype,{
-	type:"animal"
 })
 
-let wh = new Animal()	
-function Person(){}
-Object.assign(Person.prototype,wh)
-Person.prototype.kind="person"
+
+function Person (name,sex) {
+	 Animal.call(this, sex)
+	this.name = name
+}
+
+Object.setPrototypeOf(Person.prototype, Animal.prototype)
+// 或者
+// Person.prototype = Object.create(Animal.prototype)
+// Person.prototype.constructor = Person
 
 
-let xhl = new Person()
-console.log(wh.type)
-console.log(xhl.type)
-	
-	
+Person.prototype.kind = "person"
+
+var tom = new Person("tom", "man")
+
+log(tom)
+
 </script>
 	</body>
 </html>
