@@ -13,15 +13,18 @@ var apple = {
 var _apple = new Proxy(apple,{
 	get:function(target,propKey,receiver){
 		console.log("get")
-		return Reflect.get(target, propKey, receiver);
+		// return Reflect.get(target, propKey, receiver);
+		return target[propKey]
 	},
 	set:function(target,propKey,value,receiver){
 		console.log("set")
-		return Reflect.get(target, propKey, value,receiver);
+		return Reflect.set(target, propKey, value,receiver);
 	}
 })
+// console.log(_apple.name)
+// _apple.name = "app"
 console.log(_apple.name)
-apple.age = 12
-console.log(_apple.age)
+// apple.age = 12
+// console.log(_apple.age)
 	</script>
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function createSingle () {
+            var instance;
+            
+            return function (name) {
+                if (instance) {
+                    return instance
+                }
+
+                this.name = name;
+                this.eat = () => {
+                    console.log('eat')
+                }
+                instance = this;
+            }
+        }
+
+        const SingleInstance = createSingle()
+        const instance = new SingleInstance("xiaoming")
+        const instance1 = new SingleInstance("xiaohong")
+        console.log(instance === instance1)
+    </script>
+</body>
+</html>

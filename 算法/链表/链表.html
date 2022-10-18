@@ -58,5 +58,32 @@
             this.next = null
         }
     </script>
+    <script>
+
+        var node = {
+            next,
+            value,
+        }
+
+        class Node {
+            constructor() {
+                this.value = 'head'
+                this.next = null
+            }
+        }
+
+        class NodeList {
+            constructor(value) {
+                this.head = new Node(value)
+            }
+            
+            add(preNode, value) {
+                const node = new Node(value)
+                node.next = preNode.next
+                preNode.next = node
+            }
+        }
+
+    </script>
 </body>
 </html>

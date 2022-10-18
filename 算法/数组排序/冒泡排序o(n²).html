@@ -5,5 +5,18 @@
 		<title></title>
 	</head>
 	<body>
+		<script>
+			function popSort (array) {
+				for (let j = array.length; j > 0 ; j--) {
+					for (let index = 0; index < j - 1; index++) {
+						if (array[index] > array[index + 1]) {
+							let temp = array[index + 1]
+							array[index + 1] = array[index]
+							array[index] = temp
+						}
+					}
+				}
+			}
+		</script>
 	</body>
 </html>

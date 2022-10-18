@@ -6,6 +6,14 @@
 	</head>
 	<body>
 	</body>
+<script>
+	function Person () {
+			console.log(new.target === Person)
+            console.log(this instanceof Person)
+        }
+        Person() // false
+        new Person() // true
+</script>
 <script type="text/javascript">
 	//测试 new  操作符
 	(function(){
