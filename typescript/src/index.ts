@@ -85,3 +85,20 @@ let strLength1: number = (<string>someValue).length
   
   let myObj = {size: 10, label: "Size 10 Object"};
   printLabel(myObj);
+
+  // extends 约束
+interface Person {
+  name: string,
+  age: number,
+  think: ()=> void,
+}
+function test<T extends Person>(user: T): void {
+  console.log(user.name)
+}
+
+test({
+  name: 'long',
+  age: 12,
+  think: () => {},
+  sex: 'man',
+})
