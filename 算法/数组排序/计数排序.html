@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+https://www.jianshu.com/p/d38c7317c4e6
+条件：数据必须是有确定范围的整数
+特点：当输入的元素是 n 个 0到 k 之间的整数时，时间复杂度是O(n+k)，空间复杂度也是O(n+k)，其排序速度快于任何比较排序算法。当k不是很大并且序列比较集中时，计数排序是一个很有效的排序算法
+适用于：【k不大】、序列比较【集中】
+*/
+    var arr = [2,3,2,2,1,8,5,3]
+
+    function countSort (arr) {
+        var max =  Math.max.apply(null, arr);
+        var countArr = new Array(max + 1).fill(0)
+        
+        var result = [];
+        for (let j = arr.length;j--;) {
+            countArr[arr[j]] += 1;
+        }
+
+        for (let c = 0; c < countArr.length; c++) {
+            let count = countArr[c];
+            while (count > 0) {
+                result.push(c);
+                count--;
+            }
+        }
+        return result
+    }
+
+</script>
+</body>
+</html>

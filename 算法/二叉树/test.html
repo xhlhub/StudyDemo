@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+
+1. 二叉搜索树条件：
+左子树比它的根节点小，右子树比它的根节点小（或者左右反过来）
+
+2. 展示特点：
+画一条纵向线，从左往右，节点的值是递增的
+
+3. 实现方法：
+不管遍历、插入、查找，都是从根节点开始（递归），类似一个单链表
+
+4. 递归与循环，下面方法 insert、search可以用递归和循环。但是traverse遍历方法只能用递归，不能用循环
+循环：适合一个方向的线性路径，有回溯路径的不行
+递归：1. 回溯的。 2. 线性路径。能用循环的都可以用递归，见【_find】函数
+*/
+
+let arr = [5,3,7,2,4,6]
+
+class Node {
+    left = null;
+    right = null;
+    constructor (value) {
+        this.value = value
+    }
+}
+
+class NodeTree {
+    root = null;
+
+    // 递归
+    // _insertNode (prarentNode, node) {
+    //     if (prarentNode.value > node.value) {
+    //         if (prarentNode.left) {
+    //             this._insertNode(prarentNode.left, node)
+    //         } else {
+    //             prarentNode.left = node
+    //         }
+    //     } else {
+    //         if (prarentNode.right) {
+    //             this._insertNode(prarentNode.right, node)
+    //         } else {
+    //             prarentNode.right = node
+    //         }
+    //     }
+    // }
+
+    // insert (value) {
+    //     let node = new Node(value)
+    //     const { root } = this 
+    //     if (!root) {
+    //         this.root = node;
+    //     } else {
+    //         this._insertNode(root, node)
+    //     }
+    // }
+
+    // 循环
+    insert (value) {
+        let newNode = new Node(value)
+        if (!this.root) {
+            return this.root = newNode;
+        }
+
+        let node = this.root
+        while (node) {
+            if (value < node.value) {
+                if (node.left) {
+                    node = node.left
+                } else {
+                    return node.left = newNode
+                }
+            }
+            
+            if (value > node.value) {
+                if (node.right) {
+                    node = node.right
+                } else {
+                    return node.right = newNode
+                }
+            }
+        }
+    }
+
+    // 中序遍历：左-中-右
+    // 输出有序的值
+    // 一般用作查找
+    _traverse (node, cb) {
+        node.left && this._traverse(node.left, cb)
+        cb(node)
+        node.right && this._traverse(node.right, cb)
+    }
+
+    traverse (cb) {
+        this.root && this._traverse(this.root, cb)
+    }
+
+    // 递归
+    // _search (node, value) {
+    //     if (value < node.value) {
+    //         return node.left ? this._search(node.left, value) : null
+    //     }
+
+    //     if (value > node.value) {
+    //         return node.right ? this._search(node.right, value) : null
+    //     }
+
+    //     return node
+    // }
+
+    // search (value) {
+    //     return this.root ?  this._search(this.root, value) : null
+    // }
+
+    // 循环&指针
+    search (value) {
+        let node = this.root;
+
+        while (node) {
+            if (value < node.value) {
+                node = node.left
+            } else if (value > node.value) {
+                node = node.right
+            } else {
+                return node
+            }
+        }
+
+        return null
+    }
+    
+
+}
+
+const nodeTree1 = new NodeTree()
+nodeTree1.insert(5)
+nodeTree1.insert(3)
+nodeTree1.insert(7)
+nodeTree1.insert(2)
+nodeTree1.insert(4)
+nodeTree1.insert(6)
+nodeTree1.insert(8)
+
+// console.log(nodeTree1.root)
+
+nodeTree1.traverse((node) => {
+    // console.log(node.value)
+})
+
+// console.log(nodeTree1.search(6))
+
+
+// 递归实现for循环
+// var array = [1,3,4,6]
+// function _find (index) {
+//     if (index < array.length - 1) {
+//         _find(++index)
+//     }
+// }
+// _find(0)
+
+</script>
+</body>
+</html>
