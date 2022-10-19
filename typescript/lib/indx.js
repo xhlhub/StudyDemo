@@ -35,5 +35,12 @@ function infiniteLoop() {
 }
 create({ prop: 0 });
 create(null);
-create(42);
+var someValue = "I have a dream!";
+var strLength = someValue.length;
+var strLength1 = someValue.length;
+function printLabel(labelledObj) {
+    console.log(labelledObj.label);
+}
+var myObj = { size: 10, label: "Size 10 Object" };
+printLabel(myObj);
 //# sourceMappingURL=indx.js.map
