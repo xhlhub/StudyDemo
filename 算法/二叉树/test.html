@@ -19,7 +19,7 @@
 3. 实现方法：
 不管遍历、插入、查找，都是从根节点开始（递归），类似一个单链表
 
-4. 递归与循环，下面方法 insert、search可以用递归和循环。但是traverse遍历方法只能用递归，不能用循环
+4. 递归与循环，下面方法 insert、search可以用递归和循环。但是transverse遍历方法只能用递归，不能用循环
 循环：适合一个方向的线性路径，有回溯路径的不行
 递归：1. 回溯的。 2. 线性路径。能用循环的都可以用递归，见【_find】函数
 */
@@ -94,14 +94,31 @@ class NodeTree {
     // 中序遍历：左-中-右
     // 输出有序的值
     // 一般用作查找
-    _traverse (node, cb) {
-        node.left && this._traverse(node.left, cb)
-        cb(node)
-        node.right && this._traverse(node.right, cb)
+    // _transverse (node, cb) {
+    //     node.left && this._transverse(node.left, cb)
+    //     cb(node)
+    //     node.right && this._transverse(node.right, cb)
+    // }
+
+    // transverse (cb) {
+    //     this.root && this._transverse(this.root, cb)
+    // }
+
+    [Symbol.iterator] () {
+        return this.transverse()
     }
 
-    traverse (cb) {
-        this.root && this._traverse(this.root, cb)
+    transverse() {
+        return this.__transverse(this.root);
+    }
+
+    *__transverse(node) {
+        if (!node) {
+        return;
+        }
+        yield* this.__transverse(node.left);
+        yield node;
+        yield* this.__transverse(node.right);
     }
 
     // 递归
@@ -152,9 +169,15 @@ nodeTree1.insert(8)
 
 // console.log(nodeTree1.root)
 
-nodeTree1.traverse((node) => {
+// nodeTree1.transverse((node) => {
     // console.log(node.value)
-})
+// })
+// console.log(nodeTree1.transverse().next())
+
+for (const it of nodeTree1) {
+    console.log(it)
+}
+
 
 // console.log(nodeTree1.search(6))
 

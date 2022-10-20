@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap">
+        <div class="inner"></div>
+        <div class="inner"></div>
+    </div>
+<script>
+/*
+遍历器：Iterator
+1. 定义：一个函数，可以返回一个拥有next方法的指针对象，指针对象调用next()返回数据结构成员
+1. 作用：给不同的可遍历数据结构提供统一的遍历接口
+2. 对象的默认迭代器定义在对象Symbol.iterator属性。提供给for...of遍历。
+3. 会调用遍历器接口场合：
+    for...of
+    Array.from()
+    Map(), Set(), WeakMap(), WeakSet()（比如new Map([['a',1],['b',2]])）
+    Promise.all()
+    Promise.race()
+*/
+
+// 遍历器实现：Generator 函数
+function* iterator () {
+    let i = 0;
+    while (i < this.length) {
+        yield arr[i++]
+    }
+}
+
+var arr = ['a', 'b']
+
+arr[Symbol.iterator] = iterator
+
+const arrIteratorPointer = arr[Symbol.iterator]()
+
+// console.log(arrIteratorPointer.next())
+// console.log(arrIteratorPointer.next())
+// console.log(arrIteratorPointer.next())
+
+// for of 实现了自动调用next
+// for (const it of arr) {
+//     console.log(it)
+// }
+
+/*
+1. for...of 
+可以使用for of遍历的原始数据结构：
+- 数组
+- Set 和 Map 结构
+- 某些类似数组的对象（比如arguments对象、DOM NodeList 对象）
+- 字符串
+- Generator 对象
+
+*注意⚠️：对象不支持for...of，对象用for...in
+*for in 只能遍历对象和数组
+
+
+2. for...of 优点
+有着同for...in一样的简洁语法，但是没有for...in那些缺点。（不会遍历原型）
+不同于forEach方法，它可以与break、continue和return配合使用。
+提供了遍历所有数据结构的统一操作接口。
+*/
+
+
+
+// 遍历器实现：普通版
+// function iterator () {
+//     let i = 0;
+//     return {
+//         next: () => {
+//             return i < this.length ?
+//             { done: false, value: arr[i++]} : 
+//             { done: true, value: undefined }
+//         }
+//     }
+// }
+
+// var str = "abc"
+// for (const it of str) {
+//     console.log(it) // a b c
+// }
+// for (const it in str) {
+//     console.log(it) // 0 1 2
+// }
+
+// var set1 = new Set([1,2,3])
+// for (const it of set1) {
+    // console.log(it) // a b c
+// }
+// for (const it in set1) {
+//     console.log(it) // 不能遍历
+// }
+
+// 
+var htmlcollection = document.getElementsByTagName('div')
+var nodelist = document.getElementById("wrap").childNodes
+// // debugger
+// for (const it of htmlcollection) {
+//     // console.log(it) // a b c
+// }
+// for (const it in htmlcollection) {
+//     console.log(it) // 不能遍历
+// }
+// for (const it in nodelist) {
+//     console.log(it) // 不能遍历
+// }
+
+/*
+for...in
+发现：并不会遍历原型链上所有属性？起码不会遍历Object.prototype的属性
+结论：遍历除Object.prototype外的原型链属性？
+*/
+var obj = {}
+for (const key in obj) {
+    console.log(key) // 不执行
+}
+
+class Person {}
+Person.prototype.type = "person"
+
+class Man extends Person {
+    constructor(name) {
+        super()
+        this.name = name
+    }
+}
+Man.prototype.sex="man"
+
+var xhl = new Man('xhl')
+for (const key in xhl) {
+    console.log(key) // type sex name
+}
+
+Object.keys(xhl).forEach(item => {
+    console.log(item)
+})
+
+/*
+数据结构使用遍历方法
+
+一：数组：
+1. for循环
+优点：可中断
+缺点：写法繁琐
+2. forEach forMap every
+优点：自带功能
+缺点：不能中断
+3. for...of（返回value）
+优点：可中断、写法简单
+缺点：es6语法
+
+二：object对象:
+1. for...in
+缺点：
+a: 数组的键名是数字，但是for...in循环是以字符串作为键名“0”、“1”、“2”等等。
+b: for...in循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。
+c: 某些情况下，for...in循环会以任意顺序遍历键名
+
+2. Object.keys(obj)、Object.values(obj)、Object.entries(obj)
+优点：只遍历对象自己的属性
+
+
+三：类数组1. 属性包含0 1 3 数字 2.有length属性
+比如：类似数组的对象（比如arguments对象、DOM NodeList 对象）
+
+1. for循环
+
+2. for of
+
+四：有遍历器属性数据类型 Set Map等
+1. for of
+
+*/
+</script>
+</body>
+</html>
