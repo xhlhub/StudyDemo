@@ -1,0 +1,2 @@
+## 参考链接
+[Ts10年更新总结](https://www.yuque.com/docs/share/c344bc61-dadd-4f08-9981-d2fe3f64ada4?#%20%E3%80%8ATypeScript%20%E9%87%8D%E8%A6%81%E6%9B%B4%E6%96%B0%E5%9B%9E%E9%A1%BE%EF%BC%8810%E5%91%A8%E5%B9%B4%EF%BC%89%E3%80%8B)
