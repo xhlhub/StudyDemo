@@ -14,7 +14,7 @@
 <script>
 /*
 遍历器：Iterator
-1. 定义：一个函数，可以返回一个拥有next方法的指针对象，指针对象调用next()返回数据结构成员
+1. 定义：遍历器对象：一个拥有next方法的指针对象，调用next()返回数据结构成员
 1. 作用：给不同的可遍历数据结构提供统一的遍历接口
 2. 对象的默认迭代器定义在对象Symbol.iterator属性。提供给for...of遍历。
 3. 会调用遍历器接口场合：
@@ -35,9 +35,7 @@ function* iterator () {
 
 var arr = ['a', 'b']
 
-arr[Symbol.iterator] = iterator
-
-const arrIteratorPointer = arr[Symbol.iterator]()
+const arrIteratorPointer = arr[Symbol.iterator]() = iterator
 
 // console.log(arrIteratorPointer.next())
 // console.log(arrIteratorPointer.next())
@@ -152,7 +150,7 @@ Object.keys(xhl).forEach(item => {
 优点：自带功能
 缺点：不能中断
 3. for...of（返回value）
-优点：可中断、写法简单
+优点：可中断,可以与break、continue和return配合使用
 缺点：es6语法
 
 二：object对象:
