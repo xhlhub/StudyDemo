@@ -7,6 +7,7 @@ type ArrayNode = {
 type TreeNode = {
     id: number,
     value: number | string,
+    parentId: number | null,
     children?: Array<TreeNode>,
 }
 
@@ -19,26 +20,19 @@ var arr: ArrayNode[] = [
     {
         id: 2,
         value: 3,
-        parentId: null
+        parentId: 4
     },
     {
         id: 3,
         value: 4,
         parentId: 2
     },
+    {
+        id: 4,
+        value: 5,
+        parentId: null
+    },
 ]
-
-var tree: TreeNode[] = [{
-    id: 2,
-    value: 3,
-    children: [{
-        id: 1,
-        value: 2,
-    },{
-        id: 3,
-        value: 4,
-    },]
-}]
 
 
 
@@ -46,28 +40,33 @@ var tree: TreeNode[] = [{
 题目：编写reverse函数，把arr生成tree
 */ 
 
-type resultNode = TreeNode & ArrayNode;
-
 interface ParentIdMap {
-    [index: number]: resultNode,
+    [index: number]: TreeNode[],
 }
 
-function reverse (array: ArrayNode[]): TreeNode[]  {
+function reverse (array: TreeNode[]): TreeNode[]  {
     const parentIdMap: ParentIdMap = {}
     let root;
-    array.forEach((item: resultNode) => {
+    array.forEach((item: TreeNode) => {
         if (item.parentId) {
             if (parentIdMap[item.parentId]) {
-                parentIdMap[item.parentId].children!.push(item)
+                parentIdMap[item.parentId].push(item)
             } else {
-                item.children = [item]
-                parentIdMap[item.parentId] = item
+                parentIdMap[item.parentId] = [item]
             }
         } else {
             root = item
         }
+
+        if (parentIdMap[item.id]) {
+            item.children = parentIdMap[item.id]
+        } else {
+            item.children = parentIdMap[item.id] = []
+        }
     })
     return root
 }
+
+// 技巧：遍历每个元素，找他的父节点和子节点。
 
 console.log(reverse(arr))
