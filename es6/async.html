@@ -100,5 +100,43 @@ var p1 = new Promise(function(resolve,reject){
 	// })
 	
 </script>
+<script>
+	// async函数会返回1个promise
+	const genPropmise = (time = 1000, resolved = true) =>
+	  new Promise((resolve, reject) => {
+		setTimeout(() => {
+		  resolved ? resolve(1) : reject();
+		}, time);
+	  });
+
+	const getData = async () => {
+	// 写法1
+	// getData外部只能接收到resolve状态，并且无返回值，因为reject状态被内部catch接收
+	  try {
+	    await genPropmise(2000, false);
+	  } catch (error) {
+	  }
+
+	  // 写法2 
+	  // getData外部能接收到resolve状态，无返回值
+	  // reject会被getData外部接受
+	  await genPropmise(2000, true);
+
+	  // 写法3 
+	  // getData外部能接收到resolve状态（res）
+	  // reject会被getData外部接受
+	  return await genPropmise(2000, true);
+	  
+	};
+
+	const result = getData()
+	  .then((res) => {
+		debugger;
+	  })
+	  .catch((err) => {
+		debugger;
+	  });
+	debugger;
+  </script>
 	</body>
 </html>
