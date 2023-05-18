@@ -127,6 +127,9 @@ var p1 = new Promise(function(resolve,reject){
 	  // reject会被getData外部接受
 	  return await genPropmise(2000, true);
 	  
+	  // 写法4
+	  // getData外部能接收到resolve状态（1）
+	  return 1
 	};
 
 	const result = getData()
