@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
-	<script type="text/javascript">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body></body>
+  <!-- <script type="text/javascript">
 		const fibArr = [1,1,2,3,5,8]
 
 		// function fib (n) {
@@ -38,5 +37,26 @@
 		}
 
 		console.log(fib(5))
-	</script>
+	</script> -->
+  <script>
+    // 1 1 2 3 5
+    const obj = {};
+    function fib(n) {
+      console.log(1);
+      if (n < 2) {
+        // obj[n] = 1;
+        return 1;
+      }
+      //   if (obj[n]) {
+      //     return obj[n];
+      //   }
+      obj[n] = fib(n - 2) + fib(n - 1);
+      return obj[n];
+    }
+
+    console.log(fib(4));
+
+    // n = 4 f(4) = f(2) + f(3)
+    // n = 2 f(2) = f(1) + f(0)
+  </script>
 </html>
