@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-<script>
-window.log = console.log
-var cbs = []
+  </head>
+  <body>
+    <a href="./name">/name</a>
+    <a href="#/name">#/name</a>
+    <script>
+      fetch("http://www.baodi.com", { name: "2" });
+    </script>
+    <script>
+      function instance(target, constructor) {
+        return Object.getPrototypeOf(target).constructor === constructor;
+      }
 
-var foo = (val) => { return val }
-
-
-
-// cbs.push(foo, bar)
-
-(function () {
-    var a = 1
-
-    function bar() {
-      return a + foo(2)
-    }
-
-    bar()
-
-})()
-
-</script>
-</body>
+      const arr = [];
+      const b = new Array(1, 2);
+      console.log(instance(arr, Array));
+      console.log(instance(b, Array));
+    </script>
+  </body>
 </html>

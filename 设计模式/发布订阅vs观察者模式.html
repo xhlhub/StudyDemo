@@ -1,41 +1,96 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-		<input type="text" name="" id="input" value="" />
-		<div>name:<span style="font-weight: 600;" id="name"></span></div>
-	</body>
-	<script type="text/javascript">
-		var spanDom=document.getElementById("name");
-		var inputDom=document.getElementById("input");	
-//		inputDom.onchange=function(){
-//			subject.name=inputDom.value;
-//		}
-		//观察者
-		var observer={
-			//观察者反应
-			action:function (){
-				spanDom.innerText=subject.name;
-			}
-		}
-		//被观察者
-		var subject={
-			_name:"",
-			observerList:[observer],//观察者对象list
-			set name(name){
-				this._name=name;
-				//监听值改变就执行观察者队列
-				this.observerList.map(observerItem=>{
-					observerItem.action()
-				})
-			},
-			get name(){
-				return this._name
-			},
-		}
-		subject.name="aaa";
-	</script>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <input type="text" name="" id="input" value="" />
+    <div>name:<span style="font-weight: 600" id="name"></span></div>
+  </body>
+  <script type="text/javascript">
+    var spanDom = document.getElementById("name");
+    var inputDom = document.getElementById("input");
+    //		inputDom.onchange=function(){
+    //			subject.name=inputDom.value;
+    //		}
+    //观察者
+    var observer = {
+      //观察者反应
+      action: function () {
+        spanDom.innerText = subject.name;
+      },
+    };
+    //被观察者
+    var subject = {
+      _name: "",
+      observerList: [observer], //观察者对象list
+      set name(name) {
+        this._name = name;
+        //监听值改变就执行观察者队列
+        this.observerList.map((observerItem) => {
+          observerItem.action();
+        });
+      },
+      get name() {
+        return this._name;
+      },
+    };
+    subject.name = "aaa";
+
+    // 发布订阅
+    class Publisher {
+      constructor({ state = {}, reducer }) {
+        this.listener = [];
+        this.state = state;
+        this.reducer = reducer;
+      }
+
+      subscrip(action) {
+        this.listener.push(action);
+      }
+
+      dispatch(type, args) {
+        this.state = this.reducer[type]?.(this.state, args);
+        this.run();
+      }
+
+      run() {
+        this.listener.forEach((action) => {
+          action();
+        });
+      }
+    }
+
+    const store = new Publisher({
+      state: {
+        name: "a",
+        age: 0,
+      },
+      reducer: {
+        ADD: (state, count) => {
+          return {
+            ...state,
+            age: state.age + count,
+          };
+        },
+        "CHANGE-NAME": (state, name) => {
+          return {
+            ...state,
+            name,
+          };
+        },
+      },
+    });
+
+    function observer() {
+      console.log(store.state);
+    }
+
+    store.subscrip(observer);
+
+    document.getElementById("name").onclick = function () {
+      store.dispatch("ADD", 2);
+    };
+  </script>
 </html>

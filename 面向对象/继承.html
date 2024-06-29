@@ -1,77 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        // var personModel = {
-        //     type: 'person',
-        //     name: 'model',
-        //     sayName: function(){
-        //         return this.name
-        //     }
-        // }
+      // var personModel = {
+      //     type: 'person',
+      //     name: 'model',
+      //     sayName: function(){
+      //         return this.name
+      //     }
+      // }
 
-        // var person1 = Object.create(personModel)
-        // var person2 = Object.create(personModel, {
-        //     name: {
-        //         value: 'person2'
-        //     }
-        // })
-        // console.log(person1.sayName())
-        // console.log(person2.sayName())
-        // class Person {
-        //     constructor (name) {
-        //         this.name = name
-        //     }
-        //     sayName() {
-        //         console.log(this.name)
-        //     }
-        // }
+      // var person1 = Object.create(personModel)
+      // var person2 = Object.create(personModel, {
+      //     name: {
+      //         value: 'person2'
+      //     }
+      // })
+      // console.log(person1.sayName())
+      // console.log(person2.sayName())
+      // class Person {
+      //     constructor (name) {
+      //         this.name = name
+      //     }
+      //     sayName() {
+      //         console.log(this.name)
+      //     }
+      // }
 
-        // Person.prototype.type = 'person'
+      // Person.prototype.type = 'person'
 
-        // class Man extends Person {
-        //     constructor(props){
-        //         super(props)
-        //         this.sex = 'man'
-        //     }
-        //     saySex() {
-        //         console.log(this.sex)
-        //     }
-        // }
+      // class Man extends Person {
+      //     constructor(props){
+      //         super(props)
+      //         this.sex = 'man'
+      //     }
+      //     saySex() {
+      //         console.log(this.sex)
+      //     }
+      // }
 
-        // const xiaowang = new Person('xiaowang')
-        // const xiaohei = new Man('xiaohei')
+      // const xiaowang = new Person('xiaowang')
+      // const xiaohei = new Man('xiaohei')
 
-        class Animal {
-
-            constructor (sex, age) {
-                this.sex = sex; // 构造函数继承
-                this.age = age;
-            }
-            makeLove () {
-                if (age > 10) {
-                    console.log('i can make love...')
-                } else {
-                    console.log('i cant make love...')
-                }
-            }
-            get fertilit () { // 原型继承
-                return this.sex === 'female'
-            }
-
+      class Animal {
+        constructor(sex, age) {
+          this.sex = sex; // 构造函数继承
+          this.age = age;
         }
-        Animal.prototype.type = 'animal' // 原型继承
+        makeLove() {
+          if (age > 10) {
+            console.log("i can make love...");
+          } else {
+            console.log("i cant make love...");
+          }
+        }
+        get fertilit() {
+          // 原型继承
+          return this.sex === "female";
+        }
+      }
+      Animal.prototype.type = "animal"; // 原型继承
 
-        var mao1 = new Animal('female', 5)
-        console.log(mao1)
+      var mao1 = new Animal("female", 5);
+      console.log(mao1);
 
-        
+      Function.prototype.a = 1;
+      Object.prototype.b = 2;
+      function F() {}
+      const f = new F();
+
+      console.log(F.a); // 1
+      console.log(F.b); // 2
+      console.log(f.a); // undefined
+      console.log(f.b); // 2
     </script>
-</body>
+  </body>
 </html>

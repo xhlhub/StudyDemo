@@ -1,34 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- <script>
+      function createSingle() {
+        var instance;
+
+        return function (name) {
+          if (instance) {
+            return instance;
+          }
+
+          this.name = name;
+          this.eat = () => {
+            console.log("eat");
+          };
+          instance = this;
+        };
+      }
+
+      const SingleInstance = createSingle();
+      const instance = new SingleInstance("xiaoming");
+      const instance1 = new SingleInstance("xiaohong");
+      console.log(instance === instance1);
+    </script> -->
     <script>
+      function singleIns(props) {
+        var instance;
+        return function (name, age) {
+          if (instance) return instance;
+          this.name = name;
+          this.age = age;
+          this.eat = () => {
+            console.log("eat");
+          };
 
-        function createSingle () {
-            var instance;
-            
-            return function (name) {
-                if (instance) {
-                    return instance
-                }
+          instance = this;
+        };
+      }
 
-                this.name = name;
-                this.eat = () => {
-                    console.log('eat')
-                }
-                instance = this;
-            }
-        }
+      var CreateInstance = singleIns();
+      var ins = new CreateInstance("小明", 12);
+      var ins1 = new CreateInstance("小李", 10);
+      console.log(ins === ins1);
+      debugger;
 
-        const SingleInstance = createSingle()
-        const instance = new SingleInstance("xiaoming")
-        const instance1 = new SingleInstance("xiaohong")
-        console.log(instance === instance1)
+      //   function countUpdate() {
+      //     var count = 0;
+      //     return function () {
+      //       count++;
+      //       return count;
+      //     };
+      //   }
+      //   var counter = countUpdate();
+      //   var count = counter();
+      //   var count1 = counter();
     </script>
-</body>
+  </body>
 </html>
